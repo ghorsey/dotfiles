@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# Setup Config files for managing dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
+
+if [ ! -f /bin/zsh ]; then
+  echo "setting up zsh"
+  sudo apt-get update
+  sudo apt-get upgrade -y
+  sudo apt-get install zsh -y
+fi
+
+if [ ! -d ~/.oh-my-zsh ]; then
+  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+  echo "Restart the script to complete the setup"
+  exit 0
+fi
+
+if ! grep -q "alias config=" $HOME/.zshrc; then
+  echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.zshrc
+fi
+
+if [ $SHELL != /bin/zsh ] && [ $SHELL != /usr/bin/zsh ]; then
+  echo "Setting default shell"
+  sudo chsh --shell /bin/zsh
+fi
+
+
+if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $HOME/.zshrc
+fi
+
+if ! which -s rustup; then
+  echo "Installing Rust via Rustup"
+  sudo apt-get update
+  sudo apt-get install build-essential xclip -y
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  exit 0
+fi
+
+if ! which -s unzip; then
+  echo 'Installing unzip'
+  sudo apt-get update
+  sudo apt-get install unzip -y
+fi
+
+if ! which -s xclip; then
+  echo 'Installing xclip'
+  sudo apt-get update
+  sudo apt-get install xclip -y
+fi
+
+if ! which -s bob; then
+  echo "Installing Bob and NeoVim"
+  cargo install bob-nvim
+fi
+
+if ! which -s nvim; then
+  echo "Installing NeoVim Stable"
+  bob install stable
+  bob use stable
+  echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $HOME/.zshrc
+  echo 'Restart the terminal or source .zshrc to access nvim'
+fi
+
+if ! which -s starship; then
+  echo "Installing Starship Prompt 🚀"
+  sudo apt-get update
+  sudo apt-get install cmake
+  cargo install starship --locked
+  echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
+fi
+
+if ! which -s bat; then
+  echo "Installing bat"
+  cargo install bat --locked
+  echo "alias cat=bat -h" >> $HOME/.zshrc
+fi
+
+ if ! which -s rg; then
+  echo "Installing ripgrep"
+  cargo install ripgrep --locked
+fi
+
+if ! which -s eza; then
+  echo "Installing Eza"
+  cargo install eza --locked
+  echo "alias ls=eza -h" >> $HOME/.zshrc
+fi
+  
+if ! which -s tldr; then
+  echo "Installing TealDeer"
+  cargo install tealdeer --locked
+fi
+
+if ! which -s porsmo; then
+  echo "Installing Porsmo"
+  sudo apt-get update
+  sudo apt-get install -y libasound2-dev librust-alsa-sys-dev
+  cargo install porsmo 
+fi
+
+#if ! which -s gitui; then
+#  echo "Installing GitUI"
+#  cargo install gitui
+#fi
+
+if ! which -s mise; then
+  echo "Installing mise"
+  sudo apt-get update
+  sudo apt-get install libssl-dev
+  cargo install mise
+  echo 'eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
+fi
+
