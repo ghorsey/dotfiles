@@ -1,5 +1,22 @@
 #!/bin/zsh
 
+function aptInstall {
+  if [[ -z "$1" ]]; then
+    echo "Invalid argument missing component name"
+    return 1
+  fi
+
+  # Guard clause to not install more than once
+  if ! which -s "$1"; then
+    echo "$1 is installed"
+    return 0;
+  fi
+
+  echo "Installing $1 from apt-get"
+  sudo apt-get update
+  sudo apt-get install "$1" -y
+}
+
 # Setup Config files for managing dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
@@ -30,17 +47,18 @@ fi
 
 if ! which -s rustup; then
   echo "Installing Rust via Rustup"
-  sudo apt-get update
-  sudo apt-get install build-essential xclip -y
+  aptInstall build-essential
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   exit 0
 fi
 
 if ! which -s unzip; then
-  echo 'Installing unzip'
-  sudo apt-get update
-  sudo apt-get install unzip -y
+  echo "gah; unzip not found"
+else
+  echo "gah: unzip found"
 fi
+
+aptInstall unzip
 
 if ! which -s xclip; then
   echo 'Installing xclip'
@@ -93,8 +111,8 @@ fi
 
 if ! which -s porsmo; then
   echo "Installing Porsmo"
-  sudo apt-get update
-  sudo apt-get install -y libasound2-dev librust-alsa-sys-dev
+  aptInstall libasound2-dev
+  aptInstall librust-alsa-sys-dev
   cargo install porsmo 
 fi
 
@@ -110,4 +128,5 @@ if ! which -s mise; then
   cargo install mise
   echo 'eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
 fi
+
 
