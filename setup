@@ -1,25 +1,61 @@
-#!/bin/zsh
+#!/bin/bash
+
+function config() {
+  /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+}
 
 function aptInstall {
-  if [[ -z "$1" ]]; then
+  local app=$1
+  if [[ -z "$app" ]]; then
     echo "Invalid argument missing component name"
     return 1
   fi
 
+  local appInstalled=$(dpkg -l | grep -iq "^ii\s*$app" && echo "installed")
+
   # Guard clause to not install more than once
-  if ! which -s "$1"; then
-    echo "$1 is installed"
+  if [[ -n $appInstalled ]]; then
+    echo "$app is installed by apt-get"
     return 0;
   fi
 
-  echo "Installing $1 from apt-get"
+  echo "apt-get Installing: $app"
   sudo apt-get update
-  sudo apt-get install "$1" -y
+  sudo apt-get install "$app" -y
+}
+
+function cargoInstall {
+  local app=$1
+  local echoBootstrap=$2
+
+  if [[ -z "$app" ]]; then
+    echo "Missing required argument: the name of the cargo package to install"
+    return 1
+  fi
+
+  local installed=$(cargo install --list | grep -iq "$app" && echo "installed")
+
+  # Guard clause to not install more than once
+  if [[ -n $installed ]]; then
+    echo "$app is installed by cargo"
+    return 0;
+  fi
+
+  echo "Cargo Installing: $app"
+  cargo install "$app" --locked
+}
+
+function createAlias() {
+  local aliasName=$1
+  local aliasValue=$2
+
+  local aliasExists=$(grep "alias $aliasName=$aliasValue" "$HOME/.zshrc")
+  [[ -n $aliasExists ]] || echo "alias $aliasName=$aliasValue" >> $HOME/.zshrc
 }
 
 # Setup Config files for managing dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+createAlias config "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 if [ "$#" -ne 2 ]; then
   echo "Please call this script with the desired git user.name and user.email:"
@@ -30,46 +66,31 @@ fi
 [[ "$1" == $(config config user.name) ]] || config config user.name "$1"
 [[ "$2" == $(config config user.email) ]] || config config user.email "$2"
 
+# Install Oh-My-Zsh
 if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
   echo "Restart the script to complete the setup"
   exit 0
 fi
 
-if ! grep -q "alias config=" $HOME/.zshrc; then
-  echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.zshrc
-fi
-
+# Install Autosuggestions for Oh-My-Zsh
 if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $HOME/.zshrc
 fi
 
+aptInstall build-essential
 if ! which -s rustup; then
   echo "Installing Rust via Rustup"
-  aptInstall build-essential
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  echo "Please restart your terminal after rust has been installed"
   exit 0
 fi
 
-if ! which -s unzip; then
-  echo "gah; unzip not found"
-else
-  echo "gah: unzip found"
-fi
-
 aptInstall unzip
+aptInstall xclip
 
-if ! which -s xclip; then
-  echo 'Installing xclip'
-  sudo apt-get update
-  sudo apt-get install xclip -y
-fi
-
-if ! which -s bob; then
-  echo "Installing Bob and NeoVim"
-  cargo install bob-nvim
-fi
+cargoInstall "bob-nvim"
 
 if ! which -s nvim; then
   echo "Installing NeoVim Stable"
@@ -77,54 +98,39 @@ if ! which -s nvim; then
   bob use stable
   echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $HOME/.zshrc
   echo 'Restart the terminal or source .zshrc to access nvim'
+  exit 0
 fi
 
+aptInstall cmake
 if ! which -s starship; then
   echo "Installing Starship Prompt 🚀"
-  sudo apt-get update
-  sudo apt-get install cmake
   cargo install starship --locked
   echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
 fi
 
-if ! which -s bat; then
-  echo "Installing bat"
-  cargo install bat --locked
-  echo "alias cat=bat -h" >> $HOME/.zshrc
-fi
+cargoInstall "bat"
+createAlias "cat" "bat"
 
- if ! which -s rg; then
-  echo "Installing ripgrep"
-  cargo install ripgrep --locked
-fi
+cargoInstall "ripgrep"
 
-if ! which -s eza; then
-  echo "Installing Eza"
-  cargo install eza --locked
-  echo "alias ls=eza -h" >> $HOME/.zshrc
-fi
+cargoInstall "eza"
+createAlias "ls" "eza"
+createAlias "ll" "eza -lh"
   
-if ! which -s tldr; then
-  echo "Installing TealDeer"
-  cargo install tealdeer --locked
-fi
+cargoInstall "tealdeer"
 
-if ! which -s porsmo; then
-  echo "Installing Porsmo"
-  aptInstall libasound2-dev
-  aptInstall librust-alsa-sys-dev
-  cargo install porsmo 
-fi
+aptInstall libasound2-dev
+aptInstall librust-alsa-sys-dev
+cargoInstall "porsmo"
 
 #if ! which -s gitui; then
 #  echo "Installing GitUI"
 #  cargo install gitui
 #fi
 
+aptInstall libssl-dev
 if ! which -s mise; then
   echo "Installing mise"
-  sudo apt-get update
-  sudo apt-get install libssl-dev
   cargo install mise
   echo 'eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
 fi
