@@ -49,8 +49,8 @@ function createAlias() {
   local aliasName=$1
   local aliasValue=$2
 
-  local aliasExists=$(grep "alias $aliasName=$aliasValue" "$HOME/.zshrc")
-  [[ -n $aliasExists ]] || echo "alias $aliasName=$aliasValue" >> $HOME/.zshrc
+  local aliasExists=$(grep "alias $aliasName=\"$aliasValue\"" "$HOME/.zshrc")
+  [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> $HOME/.zshrc
 }
 
 # Setup Config files for managing dotfiles
