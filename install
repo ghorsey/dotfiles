@@ -122,8 +122,8 @@ if ! which -s starship; then
   source $RC_FILE
 fi
 
-local CONFIG_HOME="$HOME/.config"
-
-ln -sf "$PWD/.config/nvim $CONFIG_HOME/nvim"
-ln -sf "$PWD/.config/starship.toml $CONFIG_HOME/starship.toml"
-ln -sf "$PWD/sample.gitconfig $HOME/.gitconfig
+rm "$HOME/.config/starship.toml"
+ln -sf "$PWD/.config/nvim" "$HOME/.config/nvim"
+ln -sf "$PWD/.config/starship.toml" "$HOME/.config/starship.toml"
+ln -sf "$PWD/sample.gitconfig" "$HOME/.gitconfig"
+ln -sf "$PWD/.config/tealdeer" "$HOME/.config/tealdeer"
