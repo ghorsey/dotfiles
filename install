@@ -72,7 +72,10 @@ fi
 
 if ! which rustup; then
   echo "Installing Rust via Rustup"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s --y
+  # https://stackoverflow.com/questions/57251508/run-rustups-curl-fetched-installer-script-non-interactively
+  # `-s` parameter: you set sh to read command from the standard input
+  # `-y` to auto accept options
   echo "Please restart your terminal after rust has been installed"
 fi
 
