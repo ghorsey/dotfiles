@@ -3,15 +3,6 @@ echo "******************************"
 echo "* DevPod installation Script *"
 echo "******************************"
 
-local RC_FILE
-local STARSHIP_SHELL
-if $SHELL *= "/bin/zsh"; then
-  STARSHIP_SHELL="zsh"
-  RC_FILE="$HOME/.zshrc"
-else 
-  STARSHIP_SHELL="bash"
-  RC_FILE="$HOME/.bashrc"
-fi
 
 function aptInstall {
   local app=$1
@@ -61,6 +52,23 @@ function createAlias() {
   local aliasExists=$(grep "alias $aliasName=\"$aliasValue\"" "$RC_FILE")
   [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> "$RC_FILE"
 }
+
+aptInstall zsh
+
+sudo chsh -s zsh
+
+zsh
+
+local RC_FILE
+local STARSHIP_SHELL
+if $SHELL *= "/bin/zsh"; then
+  STARSHIP_SHELL="zsh"
+  RC_FILE="$HOME/.zshrc"
+else 
+  STARSHIP_SHELL="bash"
+  RC_FILE="$HOME/.bashrc"
+fi
+
 
 aptInstall build-essential
 aptInstall unzip
