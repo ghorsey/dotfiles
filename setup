@@ -55,7 +55,7 @@ function createAlias() {
 
 # Setup Config files for managing dotfiles
 config config --local status.showUntrackedFiles no
-createAlias config "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+createAlias "config" "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 if [ "$#" -ne 2 ]; then
   echo "Please call this script with the desired git user.name and user.email:"
