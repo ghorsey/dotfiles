@@ -4,9 +4,12 @@ echo "* DevPod installation Script *"
 echo "******************************"
 
 local RC_FILE
+local STARSHIP_SHELL
 if $SHELL *= "/bin/zsh"; then
+  STARSHIP_SHELL="zsh"
   RC_FILE="$HOME/.zshrc"
 else 
+  STARSHIP_SHELL="bash"
   RC_FILE="$HOME/.bashrc"
 fi
 
@@ -109,7 +112,13 @@ fi
 if ! which -s starship; then
   echo "Installing Starship Prompt 🚀"
   cargo install starship --locked
-  echo 'eval "$(starship init zsh)"' >> $RC_FILE
+  if $STARSHIP_SHELL = "zsh"; then
+    echo 'eval "$(starship init zsh)"' >> $RC_FILE
+  else
+    echo 'eval "$(starship init bash)"' >> $RC_FILE
+  fi
+
+
   source $RC_FILE
 fi
 
