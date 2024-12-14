@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/bin/bash echo "******************************" echo "* DevPod installation Script *"
+echo "******************************"
 
-echo "******************************"
-echo "* DevPod installation Script *"
-echo "******************************"
+if $SHELL *= "/bin/zsh"; then
+  export $RC_FILE=$HOME/.zshrc
+else 
+  export $RC_FILE=$HOME/.bashrc
+fi
 
 function aptInstall {
   local app=$1
@@ -49,8 +52,8 @@ function createAlias() {
   local aliasName=$1
   local aliasValue=$2
 
-  local aliasExists=$(grep "alias $aliasName=\"$aliasValue\"" "$HOME/.zshrc")
-  [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> $HOME/.zshrc
+  local aliasExists=$(grep "alias $aliasName=\"$aliasValue\"" "$RC_FILE")
+  [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> "$RC_FILE"
 }
 
 aptInstall build-essential
@@ -58,16 +61,19 @@ aptInstall unzip
 aptInstall xclip
 aptInstall cmake
 
-# Install Oh-My-Zsh
-if [ ! -d ~/.oh-my-zsh ]; then
-  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-  echo "Restart the script to complete the setup"
-fi
+if $SHELL *= "/bin/zsh"; then
 
-# Install Autosuggestions for Oh-My-Zsh
-if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $HOME/.zshrc
+  # Install Oh-My-Zsh
+  if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+    echo "Restart the script to complete the setup"
+  fi
+
+  # Install Autosuggestions for Oh-My-Zsh
+  if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $RC_FILE
+  fi
 fi
 
 if ! which rustup; then
@@ -94,15 +100,16 @@ if ! which nvim; then
   echo "Installing NeoVim Stable"
   bob install stable
   bob use stable
-  echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $HOME/.zshrc
-  echo 'Restart the terminal or source .zshrc to access nvim'
+  echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $RC_FILE
+  source $RC_FILE
 fi
 
 # TODO: extend cargoInstall to hadle the echo eval line
 if ! which -s starship; then
   echo "Installing Starship Prompt 🚀"
   cargo install starship --locked
-  echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
+  echo 'eval "$(starship init zsh)"' >> $RC_FILE
+  source $RC_FILE
 fi
 
 export CONFIG_HOME="$HOME/.config"
