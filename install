@@ -52,12 +52,6 @@ function createAlias() {
   [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> "$RC_FILE"
 }
 
-aptInstall zsh
-
-sudo chsh -s zsh
-
-zsh
-
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
   RC_FILE="$HOME/.zshrc"
