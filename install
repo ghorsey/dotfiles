@@ -3,10 +3,11 @@ echo "******************************"
 echo "* DevPod installation Script *"
 echo "******************************"
 
+local RC_FILE
 if $SHELL *= "/bin/zsh"; then
-  export $RC_FILE=$HOME/.zshrc
+  RC_FILE="$HOME/.zshrc"
 else 
-  export $RC_FILE=$HOME/.bashrc
+  RC_FILE="$HOME/.bashrc"
 fi
 
 function aptInstall {
@@ -67,7 +68,6 @@ if $SHELL *= "/bin/zsh"; then
   # Install Oh-My-Zsh
   if [ ! -d ~/.oh-my-zsh ]; then
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    echo "Restart the script to complete the setup"
   fi
 
   # Install Autosuggestions for Oh-My-Zsh

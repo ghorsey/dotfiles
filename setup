@@ -70,7 +70,7 @@ fi
 if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
   echo "Restart the script to complete the setup"
-  exit 0
+  source $HOME/.zshrc
 fi
 
 # Install Autosuggestions for Oh-My-Zsh
@@ -83,8 +83,7 @@ aptInstall build-essential
 if ! which -s rustup; then
   echo "Installing Rust via Rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  echo "Please restart your terminal after rust has been installed"
-  exit 0
+  source ~/.cargo/env
 fi
 
 aptInstall unzip
@@ -97,8 +96,7 @@ if ! which -s nvim; then
   bob install stable
   bob use stable
   echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $HOME/.zshrc
-  echo 'Restart the terminal or source .zshrc to access nvim'
-  exit 0
+  source $HOME/.zshrc
 fi
 
 aptInstall cmake
