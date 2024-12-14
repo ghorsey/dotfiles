@@ -74,7 +74,6 @@ if ! which rustup; then
   echo "Installing Rust via Rustup"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   echo "Please restart your terminal after rust has been installed"
-  exit 0
 fi
 
 
