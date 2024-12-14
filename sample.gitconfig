@@ -1,6 +1,7 @@
 [alias]
 	a = add .
 	ai = add -i
+	au = add -u
 	st = status
 	pl = pull --prune
 	ps = push -u

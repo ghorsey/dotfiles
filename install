@@ -1,5 +1,109 @@
 #!/bin/bash
 
-echo "**********************************"
-echo "* Running the 'install' file!!!! *"
-echo "**********************************"
+echo "******************************"
+echo "* DevPod installation Script *"
+echo "******************************"
+
+function aptInstall {
+  local app=$1
+  if [[ -z "$app" ]]; then
+    echo "Invalid argument missing component name"
+    return 1
+  fi
+
+  local appInstalled=$(dpkg -l | grep -iq "^ii\s*$app" && echo "installed")
+
+  # Guard clause to not install more than once
+  if [[ -n $appInstalled ]]; then
+    echo "$app is installed by apt-get"
+    return 0;
+  fi
+
+  echo "apt-get Installing: $app"
+  sudo apt-get update
+  sudo apt-get install "$app" -y
+}
+
+function cargoInstall {
+  local app=$1
+  local echoBootstrap=$2
+
+  if [[ -z "$app" ]]; then
+    echo "Missing required argument: the name of the cargo package to install"
+    return 1
+  fi
+
+  local installed=$(cargo install --list | grep -iq "$app" && echo "installed")
+
+  # Guard clause to not install more than once
+  if [[ -n $installed ]]; then
+    echo "$app is installed by cargo"
+    return 0;
+  fi
+
+  echo "Cargo Installing: $app"
+  cargo install "$app" --locked
+}
+
+function createAlias() {
+  local aliasName=$1
+  local aliasValue=$2
+
+  local aliasExists=$(grep "alias $aliasName=\"$aliasValue\"" "$HOME/.zshrc")
+  [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> $HOME/.zshrc
+}
+
+aptInstall build-essential
+aptInstall unzip
+aptInstall xclip
+aptInstall cmake
+
+# Install Oh-My-Zsh
+if [ ! -d ~/.oh-my-zsh ]; then
+  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+  echo "Restart the script to complete the setup"
+fi
+
+# Install Autosuggestions for Oh-My-Zsh
+if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $HOME/.zshrc
+fi
+
+if ! which rustup; then
+  echo "Installing Rust via Rustup"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  echo "Please restart your terminal after rust has been installed"
+  exit 0
+fi
+
+
+cargoInstall "bob-nvim"
+cargoInstall "bat"
+cargoInstall "ripgrep"
+cargoInstall "eza"
+cargoInstall "tealdeer"
+
+createAlias "cat" "bat"
+createAlias "ls" "eza"
+createAlias "ll" "eza -lh"
+
+if ! which nvim; then
+  echo "Installing NeoVim Stable"
+  bob install stable
+  bob use stable
+  echo 'export PATH=$PATH:$HOME/.local/share/bob/nvim-bin' >> $HOME/.zshrc
+  echo 'Restart the terminal or source .zshrc to access nvim'
+fi
+
+# TODO: extend cargoInstall to hadle the echo eval line
+if ! which -s starship; then
+  echo "Installing Starship Prompt 🚀"
+  cargo install starship --locked
+  echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
+fi
+
+export CONFIG_HOME="$HOME/.config"
+
+ln -sf "$PWD/.config/nvim $CONFIG_HOME/nvim
+
