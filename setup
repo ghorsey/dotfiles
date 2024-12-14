@@ -135,4 +135,5 @@ if ! which -s mise; then
   echo 'eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
 fi
 
+createAlias "c" "clear"
 
