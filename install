@@ -3,7 +3,6 @@ echo "******************************"
 echo "* DevPod installation Script *"
 echo "******************************"
 
-
 function aptInstall {
   local app=$1
   if [[ -z "$app" ]]; then
@@ -59,8 +58,6 @@ sudo chsh -s zsh
 
 zsh
 
-local RC_FILE
-local STARSHIP_SHELL
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
   RC_FILE="$HOME/.zshrc"
