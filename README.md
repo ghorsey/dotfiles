@@ -31,3 +31,6 @@ config checkout
 ```
 ## Use as a DevPod customization
 1. Set `--dotfiles` argument to this repository URL
+
+## Windows
+1. Install "Clang Compiler for Windows" via Visual Studio Installer
