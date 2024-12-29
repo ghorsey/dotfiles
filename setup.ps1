@@ -1,4 +1,19 @@
-function WinGetInstall {
+function CargoInstall
+{
+  param(
+    [string]$Command,
+    [string]$Package
+  )
+  $Package ??= $Command
+
+  if (-Not (Get-Command $Command -errorAction SilentlyContinue))
+  {
+    cargo install $Package --locked
+  }
+}
+
+function WinGetInstall
+{
   param(
     [string]$Command,
     [string]$Package
@@ -10,8 +25,8 @@ function WinGetInstall {
   }
 }
 
-
-function WriteFile {
+function WriteFile
+{
   param(
     [string]$Path,
     [string]$Value
@@ -23,17 +38,30 @@ function WriteFile {
   }
 }
 
-function CreateAlias {
+function CreateFunction
+{
+  param(
+    [string]$Name,
+    [string]$Command,
+    [string]$Path
+  )
+
+  WriteFile -Path $Path -Value "function $Name { $Command `$args }"
+}
+
+function CreateAlias
+{
   param(
     [string]$Alias,
     [string]$Command,
     [string]$Path
   )
-
-  WriteFile -Path $Path -Value "function $Alias { $Command $args }"
+  CreateFunction -Name "Invoke_$Alias" -Command $Command -Path $Path
+  WriteFile -Path $Path -Value "Set-Alias -Name $Alias -Value Invoke_$Alias"
 }
 
-function CreateFolderJunction {
+function CreateFolderJunction
+{
   param(
     [string]$Source,
     [string]$Destination
@@ -44,21 +72,40 @@ function CreateFolderJunction {
   }
 }
 
+if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
+{
+  $rustup_url="https://gist.github.com/fnichol/699d3c2930649a9932f71bab8a315b31/raw/a368104a422672c0594574fb53eefbb0c878d914/rustup-init.ps1"
+  & ([scriptblock]::Create((New-Object System.Net.WebClient).DownloadString($rustup_url))) -y
+}
+
+WinGetInstall -Command "nu" -Package "nushell"
+WinGetInstall -Command clang  -Package LLVM.LLVM
+WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
+
 WinGetInstall -Command sudo   -Package gerardog.gsudo
 WinGetInstall -Command git    -Package Git.Git
 WinGetInstall -Command rustup -Package Rustlang.Rustup
 
-function config { git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args } # Create a function for within this script
+function config
+{ 
+  git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args
+}
+# Create a function for within this script
 config config --local status.showUntrackedFiles no
 
-CreateAlias -Alias "config" -Path $profile -Command 'git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args'
-CreateAlias -Alias "c" -Path $profile -Command "clear"
+CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' --work-tree='$HOME'"
+# CreateFunction -Name "config" -Path $profile -Command 'git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args'
+CreateFunction -Name "c" -Path $profile -Command "clear"
 
-if (-Not (Get-Command starship -errorAction SilentlyContinue))
-{
-  "starship exists"
-}
+CargoInstall -Command starship
+CargoInstall -Command bob -Package "bob-nvim"
 
-CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
+CargoInstall -Command bat
+CreateAlias -Alias "cat" -Path $profile -Command "bat"
 
-&$profile
+CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
+
+CargoInstall -Command "eza"
+CreateAlias -Alias "ls" -Path $profile -Command "eza"
+
+& $profile
