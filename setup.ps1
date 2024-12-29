@@ -108,4 +108,4 @@ CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
 CargoInstall -Command "eza"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
 
-& $profile
+. $profile
