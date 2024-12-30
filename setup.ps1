@@ -110,4 +110,9 @@ CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
 CargoInstall -Command "eza"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
 
+CargoInstall -Command tldr -Package tealdeer
+
+CargoInstall -Command coreutils -Package coreutils
+CreateAlias -Alias touch -Command "coreutils touch" -Path $PROFILE
+
 . $profile
