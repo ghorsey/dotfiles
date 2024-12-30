@@ -78,6 +78,7 @@ if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
   & ([scriptblock]::Create((New-Object System.Net.WebClient).DownloadString($rustup_url))) -y
 }
 
+WinGetInstall -Command "win32yank" -Package "equalsraf.win32yank"
 WinGetInstall -Command "nu" -Package "nushell"
 WinGetInstall -Command clang  -Package LLVM.LLVM
 WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
@@ -97,6 +98,7 @@ CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' 
 # CreateFunction -Name "config" -Path $profile -Command 'git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args'
 CreateFunction -Name "c" -Path $profile -Command "clear"
 
+CargoInstall -Command rg -Package ripgrep
 CargoInstall -Command starship
 CargoInstall -Command bob -Package "bob-nvim"
 
