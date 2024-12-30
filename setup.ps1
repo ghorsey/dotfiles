@@ -102,6 +102,13 @@ CargoInstall -Command rg -Package ripgrep
 CargoInstall -Command starship
 CargoInstall -Command bob -Package "bob-nvim"
 
+if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
+{
+  bob install stable
+  bob use stable
+}
+
+
 CargoInstall -Command bat
 CreateAlias -Alias "cat" -Path $profile -Command "bat"
 
@@ -114,5 +121,8 @@ CargoInstall -Command tldr -Package tealdeer
 
 CargoInstall -Command coreutils -Package coreutils
 CreateAlias -Alias touch -Command "coreutils touch" -Path $PROFILE
+CreateAlias -Alias mkdir -Command "coreutils mkdir" -Path $PROFILE
+CreateAlias -Alias rm -Command "coreutils rm" -Path $PROFILE
+CreateAlias -Alias rmdir -Command "coreutils rmdir" -Path $PROFILE
 
 . $profile
