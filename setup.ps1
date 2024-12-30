@@ -91,11 +91,11 @@ function config
 { 
   git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args
 }
+
 # Create a function for within this script
 config config --local status.showUntrackedFiles no
 
 CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' --work-tree='$HOME'"
-# CreateFunction -Name "config" -Path $profile -Command 'git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args'
 CreateFunction -Name "c" -Path $profile -Command "clear"
 
 CargoInstall -Command rg -Package ripgrep
