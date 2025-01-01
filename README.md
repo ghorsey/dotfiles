@@ -15,9 +15,15 @@ git clone --bare git@github.com:ghorsey/dotfiles.git $HOME/.cfg
 ```
 
 2. Create the `config` alias.
+
+bash/zsh
 ```shell
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+```
+windows/powershell
+```powershell
+function config { git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args }
 ```
 
 3. Checkout the content of the bare repo
