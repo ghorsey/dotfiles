@@ -54,7 +54,8 @@ function createAlias() {
 
 sudo apt install zsh -y
 sudo chsh /usr/bin/zsh
-zsh # start the shell
+/usr/bin/zsh # start the shell
+
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
   RC_FILE="$HOME/.zshrc"
