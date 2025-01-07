@@ -63,6 +63,7 @@ else
   RC_FILE="$HOME/.bashrc"
 fi
 
+echo "============================ $STARSHIP_SHELL <<<<<<<<<<<<<<<<<<<<<<<<<"
 aptInstall build-essential
 aptInstall unzip
 aptInstall xclip
