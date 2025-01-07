@@ -102,6 +102,7 @@ cargoInstall "tealdeer"
 createAlias "cat" "bat"
 createAlias "ls" "eza"
 createAlias "ll" "eza -lh"
+createAlias "c" "clear"
 
 if ! which nvim; then
   echo "Installing NeoVim Stable"
