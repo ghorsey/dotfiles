@@ -53,8 +53,7 @@ function createAlias() {
 }
 
 sudo apt install zsh -y
-sudo chsh /usr/bin/zsh
-/usr/bin/zsh # start the shell
+zsh # start the shell
 
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
@@ -63,7 +62,6 @@ else
   STARSHIP_SHELL="bash"
   RC_FILE="$HOME/.bashrc"
 fi
-
 
 aptInstall build-essential
 aptInstall unzip
