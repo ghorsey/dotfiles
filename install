@@ -55,13 +55,13 @@ function createAlias() {
 sudo apt install zsh -y
 zsh # start the shell
 
-if $SHELL *= "/bin/zsh"; then
+#if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
   RC_FILE="$HOME/.zshrc"
-else 
-  STARSHIP_SHELL="bash"
-  RC_FILE="$HOME/.bashrc"
-fi
+#else 
+#  STARSHIP_SHELL="bash"
+#  RC_FILE="$HOME/.bashrc"
+#fi
 
 echo "============================ $STARSHIP_SHELL <<<<<<<<<<<<<<<<<<<<<<<<<"
 aptInstall build-essential
@@ -69,7 +69,7 @@ aptInstall unzip
 aptInstall xclip
 aptInstall cmake
 
-if $SHELL *= "/bin/zsh"; then
+#if $SHELL *= "/bin/zsh"; then
   # Install Oh-My-Zsh
   if [ ! -d ~/.oh-my-zsh ]; then
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
@@ -80,7 +80,7 @@ if $SHELL *= "/bin/zsh"; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autosuggestions)/' $RC_FILE
   fi
-fi
+#fi
 
 if ! which rustup; then
   echo "Installing Rust via Rustup"
