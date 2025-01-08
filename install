@@ -52,9 +52,9 @@ function createAlias() {
   [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> "$RC_FILE"
 }
 
-sudo apt-get install zsh -y
-sudo chsh /usr/bin/zsh
-/usr/bin/zsh # start the shell
+apt-get install zsh -y
+chsh /usr/bin/zsh
+/bin/zsh # start the shell
 
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
@@ -64,7 +64,7 @@ else
   RC_FILE="$HOME/.bashrc"
 fi
 
-echo "============================ $STARSHIP_SHELL <<<<<<<<<<<<<<<<<<<<<<<<<"
+echo "============================ $SHELL <<<<<<<<<<<<<<<<<<<<<<<<<"
 aptInstall build-essential
 aptInstall unzip
 aptInstall xclip
