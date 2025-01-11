@@ -68,6 +68,9 @@ fi
 [[ "$1" == $(config config user.name) ]] || config config user.name "$1"
 [[ "$2" == $(config config user.email) ]] || config config user.email "$2"
 
+# Install Nix
+sh <(curl -L https://nixos.org/nix/install) --daemon --yes
+
 # Install Oh-My-Zsh
 if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
