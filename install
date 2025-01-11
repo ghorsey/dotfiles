@@ -52,9 +52,9 @@ function createAlias() {
   [[ -n $aliasExists ]] || echo "alias $aliasName=\"$aliasValue\"" >> "$RC_FILE"
 }
 
-sudo apt-get install zsh -y
-sudo chsh -s /usr/bin/zsh
-/bin/zsh # start the shell
+# sudo apt-get install zsh -y
+# sudo chsh -s /usr/bin/zsh
+# /bin/zsh # start the shell
 
 if $SHELL *= "/bin/zsh"; then
   STARSHIP_SHELL="zsh"
