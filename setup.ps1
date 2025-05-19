@@ -4,7 +4,10 @@ function CargoInstall
     [string]$Command,
     [string]$Package
   )
-  $Package ??= $Command
+  if ([string]::IsNullOrEmpty($Package))
+  {
+    $Package = $Command
+  }
 
   if (-Not (Get-Command $Command -errorAction SilentlyContinue))
   {
@@ -109,7 +112,7 @@ if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 }
 
 
-CargoInstall -Command bat
+CargoInstall -Command "bat"
 CreateAlias -Alias "cat" -Path $profile -Command "bat"
 
 CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
@@ -117,12 +120,12 @@ CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
 CargoInstall -Command "eza"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
 
-CargoInstall -Command tldr -Package tealdeer
+CargoInstall -Command "tldr" -Package "tealdeer"
 
-CargoInstall -Command coreutils -Package coreutils
-CreateAlias -Alias touch -Command "coreutils touch" -Path $PROFILE
-CreateAlias -Alias mkdir -Command "coreutils mkdir" -Path $PROFILE
-CreateAlias -Alias rm -Command "coreutils rm" -Path $PROFILE
-CreateAlias -Alias rmdir -Command "coreutils rmdir" -Path $PROFILE
+CargoInstall -Command "coreutils" -Package "coreutils"
+CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
+CreateAlias -Alias "mkdir" -Command "coreutils mkdir" -Path $PROFILE
+CreateAlias -Alias "rm" -Command "coreutils rm" -Path $PROFILE
+CreateAlias -Alias "rmdir" -Command "coreutils rmdir" -Path $PROFILE
 
 . $profile
