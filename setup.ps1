@@ -115,7 +115,7 @@ if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 CargoInstall -Command "bat"
 CreateAlias -Alias "cat" -Path $profile -Command "bat"
 
-CreateFolderJunction -Source "$HOME\.config\nvim" "$HOME\nvim"
+CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
 
 CargoInstall -Command "eza"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
