@@ -57,7 +57,6 @@ function createAlias() {
 
 # Setup Config files for managing dotfiles
 config config --local status.showUntrackedFiles no
-createAlias "config" "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 if [ "$#" -ne 2 ]; then
   echo "Please call this script with the desired git user.name and user.email:"
@@ -90,8 +89,16 @@ fi
 
 aptInstall unzip
 aptInstall xclip
+aptInstall cmake
+aptInstall libasound2-dev
+aptInstall librust-alsa-sys-dev
 
 cargoInstall "bob-nvim"
+cargoInstall "bat"
+cargoInstall "ripgrep"
+cargoInstall "eza"
+cargoInstall "tealdeer"
+cargoInstall "porsmo"
 
 if ! which -s nvim; then
   echo "Installing NeoVim Stable"
@@ -101,27 +108,11 @@ if ! which -s nvim; then
   source $HOME/.zshrc
 fi
 
-aptInstall cmake
 if ! which -s starship; then
   echo "Installing Starship Prompt 🚀"
   cargo install starship --locked
   echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
 fi
-
-cargoInstall "bat"
-createAlias "cat" "bat"
-
-cargoInstall "ripgrep"
-
-cargoInstall "eza"
-createAlias "ls" "eza"
-createAlias "ll" "eza -lh"
-  
-cargoInstall "tealdeer"
-
-aptInstall libasound2-dev
-aptInstall librust-alsa-sys-dev
-cargoInstall "porsmo"
 
 #if ! which -s gitui; then
 #  echo "Installing GitUI"
@@ -135,5 +126,10 @@ if ! which -s mise; then
   echo 'eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
 fi
 
+createAlias "config" "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 createAlias "c" "clear"
+createAlias "ls" "eza"
+createAlias "ll" "eza -lh"
+createAlias "cat" "bat"
 
+wget https://github.com/mickimnet/myth-prompt-themes/raw/refs/heads/main/colorful/slanted/starship/general/starship.toml -O ~/.config/starship.toml
