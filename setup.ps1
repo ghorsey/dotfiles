@@ -75,6 +75,16 @@ function CreateFolderJunction
   }
 }
 
+function DownloadFile
+{
+  param(
+    [string]$Url,
+    [string]$OutFile
+  )
+
+  Invoke-WebRequest -Uri $Url -OutFile $OutFile
+}
+
 if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
 {
   $rustup_url="https://gist.github.com/fnichol/699d3c2930649a9932f71bab8a315b31/raw/a368104a422672c0594574fb53eefbb0c878d914/rustup-init.ps1"
@@ -99,9 +109,6 @@ WinGetInstall -Command rustup -Package Rustlang.Rustup
 
 WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
 
-
-
-
 CargoInstall -Command rg -Package ripgrep
 CargoInstall -Command starship
 CargoInstall -Command bob -Package "bob-nvim"
@@ -117,11 +124,14 @@ if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 }
 
 # create a function to have c as an alias to clear
-CreateFunction -Name "c" -Path $profile -Command "clear"
+#CreateFunction -Name "c" -Path $profile -Command "clear"
 # Map the nvim config to the correct location
 CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
 
+DownloadFile -Url "https://github.com/mickimnet/myth-prompt-themes/raw/refs/heads/main/colorful/slanted/starship/left_only/starship.toml" -OutFile '.config/starship.toml'
+
 # Create Aliases
+CreateAlias -Alias "c" -Path $profile -Command "clear"
 CreateAlias -Alias "cat" -Path $profile -Command "bat"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
 CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
