@@ -71,7 +71,7 @@ function CreateFolderJunction
   )
   if (-not (Test-Path $Destination))
   {
-    sudo New-Item -ItemType Junction -Path $Destination -Value $Source
+    New-Item -ItemType Junction -Path $Destination -Value $Source
   }
 }
 
@@ -81,29 +81,34 @@ if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
   & ([scriptblock]::Create((New-Object System.Net.WebClient).DownloadString($rustup_url))) -y
 }
 
-WinGetInstall -Command "win32yank" -Package "equalsraf.win32yank"
-WinGetInstall -Command "nu" -Package "nushell"
-WinGetInstall -Command clang  -Package LLVM.LLVM
-WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
-
-WinGetInstall -Command sudo   -Package gerardog.gsudo
-WinGetInstall -Command git    -Package Git.Git
-WinGetInstall -Command rustup -Package Rustlang.Rustup
-
+# Create a function for within this script
 function config
 { 
   git --git-dir=$HOME/.cfg/ --work-tree=$HOME $args
 }
 
-# Create a function for within this script
+# Disable showing untracked files
 config config --local status.showUntrackedFiles no
 
-CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' --work-tree='$HOME'"
-CreateFunction -Name "c" -Path $profile -Command "clear"
+WinGetInstall -Command "win32yank" -Package "equalsraf.win32yank"
+WinGetInstall -Command "nu" -Package "nushell"
+WinGetInstall -Command clang  -Package LLVM.LLVM
+WinGetInstall -Command sudo   -Package gerardog.gsudo
+WinGetInstall -Command git    -Package Git.Git
+WinGetInstall -Command rustup -Package Rustlang.Rustup
+
+WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
+
+
+
 
 CargoInstall -Command rg -Package ripgrep
 CargoInstall -Command starship
 CargoInstall -Command bob -Package "bob-nvim"
+CargoInstall -Command "bat"
+CargoInstall -Command "eza"
+CargoInstall -Command "tldr" -Package "tealdeer"
+CargoInstall -Command "coreutils" -Package "coreutils"
 
 if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 {
@@ -111,21 +116,18 @@ if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
   bob use stable
 }
 
-
-CargoInstall -Command "bat"
-CreateAlias -Alias "cat" -Path $profile -Command "bat"
-
+# create a function to have c as an alias to clear
+CreateFunction -Name "c" -Path $profile -Command "clear"
+# Map the nvim config to the correct location
 CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
 
-CargoInstall -Command "eza"
+# Create Aliases
+CreateAlias -Alias "cat" -Path $profile -Command "bat"
 CreateAlias -Alias "ls" -Path $profile -Command "eza"
-
-CargoInstall -Command "tldr" -Package "tealdeer"
-
-CargoInstall -Command "coreutils" -Package "coreutils"
 CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
 CreateAlias -Alias "mkdir" -Command "coreutils mkdir" -Path $PROFILE
 CreateAlias -Alias "rm" -Command "coreutils rm" -Path $PROFILE
 CreateAlias -Alias "rmdir" -Command "coreutils rmdir" -Path $PROFILE
+CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' --work-tree='$HOME'"
 
 . $profile
