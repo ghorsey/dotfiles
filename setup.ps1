@@ -101,9 +101,9 @@ function config
 config config --local status.showUntrackedFiles no
 
 WinGetInstall -Command "win32yank" -Package "equalsraf.win32yank"
-WinGetInstall -Command "nu" -Package "nushell"
-WinGetInstall -Command clang  -Package LLVM.LLVM
-WinGetInstall -Command sudo   -Package gerardog.gsudo
+# WinGetInstall -Command "nu" -Package "nushell"
+# WinGetInstall -Command clang  -Package LLVM.LLVM
+# WinGetInstall -Command sudo   -Package gerardog.gsudo
 WinGetInstall -Command git    -Package Git.Git
 WinGetInstall -Command rustup -Package Rustlang.Rustup
 
