@@ -498,12 +498,14 @@ command = """
     echo "$GIT_REMOTE_SYMBOL "
 """
 require_repo = true
+ignore_timeout = true
 when = '''$env:OS != "Windows_NT"'''
 shell = ["bash", "--noprofile", "--norc"]
 format = "[$output ](bg:color_git_branch fg:color_foreground_dark)"
 
 [custom.giturl_win]
 description = "Display icon for remote Git server"
+ignore_timeout = true
 command = '''
 $gitRemote = git ls-remote --get-url 2> $null
 switch -Regex ($gitRemote) {
@@ -1032,6 +1034,7 @@ format = "[$symbol($version)]($style)"
 
 [custom.root]
 # disabled = true
+ignore_timeout = true
 description = "Only display username, if sudo or different from standard user"
 style = "bold bg:color_base_red_light fg:color_foreground_light"
 command = "echo $USER"
@@ -1041,6 +1044,7 @@ format = "[$output]($style)"
 
 [custom.ssh_user]
 # disabled = true
+ignore_timeout = true
 description = "Display username, if on a ssh session, but not in tmux"
 style = "bg:color_username fg:color_foreground_light"
 command = "echo $USER"
@@ -1050,6 +1054,7 @@ format = "[$output]($style)"
 
 [custom.ssh_root]
 # disabled = true
+ignore_timeout = true
 description = "Display username on a ssh session, if different from standard user"
 style = "bold bg:color_base_red_light fg:color_foreground_light"
 command = "echo $USER"
@@ -1059,6 +1064,7 @@ format = "[$output]($style)"
 
 [custom.ssh_host]
 # disabled = true
+ignore_timeout = true
 description = "Display hostname if on a ssh session, but not inside a tmux session"
 style = "bg:color_hostname fg:color_foreground_dark bold"
 command = "uname -n"
