@@ -11,7 +11,8 @@ config.initial_cols = 120
 config.initial_rows = 28
 
 -- Window Settings
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.90
+config.enable_wayland = false
 
 -- or, changing the font size and color scheme.
 config.font_size = 10
