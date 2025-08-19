@@ -1,0 +1,72 @@
+---
+- name: Install tools and applications
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Update pacman apps
+      community.general.pacman:
+        update_cache: yes
+        upgrade: yes
+      when: ansible_facts['os_family'] == "Archlinux"
+    - name: Install packages on ArchLinux with pacman
+      community.general.pacman:
+        name:
+          - base-devel
+          - less
+          - azure-cli
+          - brave-bin
+          - dotnet-sdk
+          - fish
+          - fzf
+          - git
+          - jq
+          - man-db
+          - onedrive-abraunegg
+          - podman
+          - ripgrep
+          - ttf-firacode-nerd
+          - ttf-nerd-fonts-symbols-mono
+          - visual-studio-code-bin
+      when: ansible_facts['os_family'] == "Archlinux"
+    
+    - name: Install rust up
+      shell: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+      args:
+        executable: /bin/bash
+        creates: /home/{{ ansible_user_id }}/.cargo/bin/rustc
+    ## Windows
+    - name: Install packages on Windows using winget
+      win_shell: |
+        winget install --id=Git.Git -e --silent
+        winget install --id=Microsoft.PowerToys -e --silent
+      args:
+        executable: pwsh.exe
+      when: ansible_facts['os_family'] == "Windows"
+    - name: Install Rustup via PowerShell script (Windows only)
+      win_shell: |
+        $ProgressPreference = 'SilentlyContinue'
+        Invoke-WebRequest -Uri https://win.rustup.rs -OutFile rustup-init.exe
+        Start-Process .\rustup-init.exe -ArgumentList "-y" -Wait
+        Remove-Item .\rustup-init.exe
+      args:
+        executable: pwsh.exe
+      when: ansible_facts['os_family'] == "Windows"
+    - name: Install cargo packages
+      community.general.cargo:
+        locked: yes
+        executable: cargo
+        name:
+          - bob-nvim
+          - starship
+          - bat
+          - tealdeer
+
+      
+          
+
+
+
+
