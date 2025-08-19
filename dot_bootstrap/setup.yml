@@ -14,6 +14,7 @@
       community.general.pacman:
         name:
           - base-devel
+          - oniguruma # used by bat
           - less
           - azure-cli
           - brave-bin
@@ -29,16 +30,22 @@
           - ttf-firacode-nerd
           - ttf-nerd-fonts-symbols-mono
           - visual-studio-code-bin
+          - bat
       when: ansible_facts['os_family'] == "Archlinux"
     
-    - name: Install rust up
+    - name: Install rust up on Linux
       shell: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
       args:
         executable: /bin/bash
         creates: /home/{{ ansible_user_id }}/.cargo/bin/rustc
+      when:
+        - ansible_facts['os_family'] in ["Archlinux", "Ubuntu"]
+        - ansible_facts['ansible_env']['HOME'] is defined
+        - not ansible_facts['ansible_env']['HOME'] ~ "/.cargo/bin/rustup" is exist
     ## Windows
     - name: Install packages on Windows using winget
+      become: no
       win_shell: |
         winget install --id=Git.Git -e --silent
         winget install --id=Microsoft.PowerToys -e --silent
@@ -55,14 +62,31 @@
         executable: pwsh.exe
       when: ansible_facts['os_family'] == "Windows"
     - name: Install cargo packages
+      become: no
       community.general.cargo:
         locked: yes
-        executable: cargo
+        executable: "cargo"
         name:
           - bob-nvim
           - starship
-          - bat
           - tealdeer
+    - name: Run bob install and use stable on Linux
+      become: false
+      shell: |
+        bob install stable
+        bob use stable
+      args:
+        executable: /bin/bash
+      when: 
+        - ansible_facts['os_family'] in ["Archlinux", "Ubuntu"]
+    - name: Run bob install and use stable on Windows
+      become: false
+      win_shell: |
+        bob install stable
+        bob use stable
+      args:
+        executable: pwsh.exe
+      when: ansible_facts['os_family'] == "Windows"      
 
       
           

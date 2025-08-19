@@ -6,7 +6,10 @@ set -u # exit if undefined variable is used
 set -o pipefail # Error if a command in a pipe fails
 IFS=$'n\t' # word splitting will only happen on new lines (\n) and tabs (\t)
 sudo pacman -Syu
-sudo pacman -S ansible
+
+if ! command -v ansible >/dev/null 2>&1; then
+    sudo pacman -S ansible
+fi
 
 ansible-playbook ~/.bootstrap/setup.yml --ask-become-pass
 {{ end -}}
