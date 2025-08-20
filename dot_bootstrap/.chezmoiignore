@@ -1,0 +1,6 @@
+README.md
+
+{{- if eq .chezmoi.os "windows" }}
+.vscode
+setup.yml
+{{- end }}

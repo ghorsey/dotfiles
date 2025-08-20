@@ -1,0 +1,8 @@
+README.md
+
+{{- if eq .chezmoi.os "windows" }}
+hypr
+onedrive
+fish
+nvim
+{{- end }}
