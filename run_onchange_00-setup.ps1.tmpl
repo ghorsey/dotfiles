@@ -1,0 +1,146 @@
+{{ if eq .chezmoi.os "windows" -}}
+
+#!powershell
+
+function CargoInstall
+{
+  param(
+    [string]$Command,
+    [string]$Package
+  )
+  if ([string]::IsNullOrEmpty($Package))
+  {
+    $Package = $Command
+  }
+
+  if (-Not (Get-Command $Command -errorAction SilentlyContinue))
+  {
+    cargo install $Package --locked
+  }
+}
+
+function WinGetInstall
+{
+  param(
+    [string]$Command, 
+    [string]$Package
+  )
+
+  if (-Not (Get-Command $Command -errorAction SilentlyContinue))
+  {
+    winget install $Package
+  }
+}
+
+function WriteFile
+{
+  param(
+    [string]$Path,
+    [string]$Value
+  )
+
+  if (-Not (Get-Content $Path | Select-String -SimpleMatch -Pattern "$Value"))
+  {
+    Add-Content -Path $Path "$Value"
+  }
+}
+
+function CreateFunction
+{
+  param(
+    [string]$Name,
+    [string]$Command,
+    [string]$Path
+  )
+
+  WriteFile -Path $Path -Value "function $Name { $Command `$args }"
+}
+
+function CreateAlias
+{
+  param(
+    [string]$Alias,
+    [string]$Command,
+    [string]$Path
+  )
+  CreateFunction -Name "Invoke_$Alias" -Command $Command -Path $Path
+  WriteFile -Path $Path -Value "Set-Alias -Name $Alias -Value Invoke_$Alias"
+}
+
+function CreateFolderJunction
+{
+  param(
+    [string]$Source,
+    [string]$Destination
+  )
+  if (-not (Test-Path $Destination))
+  {
+    New-Item -ItemType Junction -Path $Destination -Value $Source
+  }
+}
+
+function DownloadFile
+{
+  param(
+    [string]$Url,
+    [string]$OutFile
+  )
+
+  Invoke-WebRequest -Uri $Url -OutFile $OutFile
+}
+
+if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
+{
+  $rustupInstaller = "$env:TEMP\rustup-init.exe"
+  $downloadUrl = "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe"
+  Invoke-WebRequest -Uri $downloadUrl -OutFile $rustupInstaller
+  Start-Process -FilePath $rustupInstaller -ArgumentList "-y" -Wait
+  Remove-Item $rustupInstaller
+  Write-Host "Rust installed successfully."
+}
+
+# WinGetInstall -Command "win32yank" -Package "equalsraf.win32yank"
+WinGetInstall -Command "fzf" -Package "junegunn.fzf"
+WinGetInstall -Command "code" -Package "Microsoft.VisualStudioCode"
+WinGetInstall -Command "starship" -Package "Starship.Starship"
+WinGetInstall -Command "zoxide" -Package "ajeetdsouza.zoxide"
+winget install "Microsoft.PowerToys"
+WinGetInstall -Command git -Package Git.Git
+WinGetInstall -Command "coreutils" -Package "uutils.coreutils"
+
+# WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
+
+CargoInstall -Command "pay-respects"
+CargoInstall -Command "rg" -Package ripgrep
+CargoInstall -Command "bob" -Package "bob-nvim"
+CargoInstall -Command "bat"
+CargoInstall -Command "eza"
+CargoInstall -Command "tldr" -Package "tealdeer"
+# CargoInstall -Command "coreutils" -Package "coreutils"
+
+if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
+{
+  bob install stable
+  bob use stable
+}
+
+# create a function to have c as an alias to clear
+# Map the nvim config to the correct location
+CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
+
+$env:PSModulePath
+Get-Module -ListAvailable PowerShellGet, PackageManagement
+
+
+
+# Create Aliases
+# CreateAlias -Alias "c" -Path $profile -Command "clear"
+# CreateAlias -Alias "cat" -Path $profile -Command "bat"
+# CreateAlias -Alias "ls" -Path $profile -Command "eza"
+# CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
+# CreateAlias -Alias "mkdir" -Command "coreutils mkdir" -Path $PROFILE
+# CreateAlias -Alias "rm" -Command "coreutils rm" -Path $PROFILE
+# CreateAlias -Alias "rmdir" -Command "coreutils rmdir" -Path $PROFILE
+# CreateAlias -Path $profile -Alias "config" -Command "git --git-dir='$HOME/.cfg' --work-tree='$HOME'"
+
+{{ end -}}
