@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "windows" -}}
+{{- template "starship_leftonly.toml.tmpl" . -}}
+{{- else -}}
+{{- template "starship_general.toml.tmpl" . -}}
+{{- end -}}
