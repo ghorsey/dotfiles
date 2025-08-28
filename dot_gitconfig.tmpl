@@ -1,7 +1,4 @@
-{{- if eq .chezmoi.os "windows" -}}
-[core]
-  autocrlf = true
-{{- end -}}
+
 [alias]
 	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
@@ -15,3 +12,17 @@
 [user]
   name = {{ (keepassxc "chezmoi/git-main").UserName }}
   email = {{ (keepassxc "chezmoi/git-main").Password }}
+{{- if eq .chezmoi.os "windows" -}}
+[core]
+  autocrlf = true
+[difftool "bc"]
+	path = c:/Program Files/Beyond Compare 4/bcomp.exe
+[mergetool "bc"]
+	path = c:/Program Files/Beyond Compare 4/bcomp.exe
+[diff]
+	tool = bc
+[merge]
+	tool = bc
+[mergetool]
+	keepBackup = false
+{{- end -}}
