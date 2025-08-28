@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "windows" -}}
+[core]
+  autocrlf = true
+{{- end -}}
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg = lg1
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[log]
+	date = local
+[user]
+  name = {{ (keepassxc "chezmoi/git-main").UserName }}
+  email = {{ (keepassxc "chezmoi/git-main").Password }}
