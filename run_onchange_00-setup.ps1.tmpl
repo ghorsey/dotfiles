@@ -96,6 +96,9 @@ function DownloadFile
   Invoke-WebRequest -Uri $Url -OutFile $OutFile
 }
 
+Install-Module posh-git -Scope CurrentUser -Force
+Install-Module -Name PSFzf -Force
+
 if (-Not (Get-Command "rustup" -errorAction SilentlyContinue))
 {
   $rustupInstaller = "$env:TEMP\rustup-init.exe"

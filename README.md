@@ -1,11 +1,12 @@
 ## Prerequisites
-1. Install KeepassXC and ensure the keepassxc-cli is on the system path
-## Manually run
+1. Install chezmoi
+  1. windows: `winget install twpayne.chezmoi`
+  2. arch: `pacman -Sy chezmoi`
+2. Install KeepassXC
+  1. windows: `winget install KeePassXCTeam.KeePassXC`
+3. Ensure the keepassxc-cli is on the system path
 
+## Troubleshooting
 
-```powershell
-Install-Module posh-git -Scope CurrentUser -Force
-Install-Module -Name PSFzf -Force
-```
-
+## Error running powershell on Windows
 On windows run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process`
