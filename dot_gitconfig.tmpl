@@ -12,6 +12,7 @@
 [user]
   name = {{ (keepassxc "chezmoi/git-main").UserName }}
   email = {{ (keepassxc "chezmoi/git-main").Password }}
+
 {{- if eq .chezmoi.os "windows" -}}
 [core]
   autocrlf = true
