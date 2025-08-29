@@ -7,3 +7,8 @@
   database = "{{ .chezmoi.homeDir }}/OneDrive/Passwords/JefeDelTodos.kdbx"
 {{- end -}}
 {{- end -}}
+
+{{- if eq .chezmoi.os "linux" -}}
+[keepassxc]
+  database = "{{ .chezmoi.homeDir }}/OneDrive/personal/Passwords/JefeDelTodos.kdbx"
+{{- end -}}
