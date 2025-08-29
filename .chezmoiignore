@@ -1,5 +1,7 @@
 README.md
 
-{{- if eq .chezmoi.os "windows" }}
+{{ if eq .chezmoi.os "windows" }}
 .wezterm.lua
-{{- end }}
+{{ else }}
+Documents/PowerShell
+{{ end }}
