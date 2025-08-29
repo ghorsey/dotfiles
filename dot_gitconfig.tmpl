@@ -27,3 +27,19 @@
 [mergetool]
 	keepBackup = false
 {{- end -}}
+
+{{ if eq .chezmoi.os "linux" }}
+[diff]
+  tool = nvimdiff
+[merge]
+  tool = nvimdiff
+  conflitstyle = diff3
+[mergetool]
+  keepBackup = false
+  trustExitCode = false
+  prompt = true
+[difftool]
+  prompt = false
+[mergetool "nvimdiff"]
+  layout = LOCAL,BASE,REMOTE / MERGED
+{{ end }}
