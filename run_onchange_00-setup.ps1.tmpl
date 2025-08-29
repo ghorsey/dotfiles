@@ -118,6 +118,7 @@ winget install "Microsoft.PowerToys"
 WinGetInstall -Command git -Package Git.Git
 WinGetInstall -Command "coreutils" -Package "uutils.coreutils"
 WinGetInstall -Command "ffmpeg" -Package "Gyan.FFmpeg"
+WingetInstall -Command "dotnet" -Package "Microsoft.DotNet.SDK.9"
 
 # WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
 
@@ -139,8 +140,8 @@ if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 # Map the nvim config to the correct location
 CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
 
-$env:PSModulePath
-Get-Module -ListAvailable PowerShellGet, PackageManagement
+# $env:PSModulePath
+# Get-Module -ListAvailable PowerShellGet, PackageManagement
 
 
 
