@@ -14,8 +14,7 @@
   email = {{ (keepassxc "chezmoi/git-main").Password }}
 [rerere]
   enabled = true
-
-{{- if eq .chezmoi.os "windows" -}}
+{{ if eq .chezmoi.os "windows" -}}
 [core]
   autocrlf = true
 [difftool "bc"]
@@ -28,7 +27,7 @@
 	tool = bc
 [mergetool]
 	keepBackup = false
-{{- end -}}
+{{ end -}}
 
 {{ if eq .chezmoi.os "linux" }}
 [diff]
