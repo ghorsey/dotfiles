@@ -12,6 +12,8 @@
 [user]
   name = {{ (keepassxc "chezmoi/git-main").UserName }}
   email = {{ (keepassxc "chezmoi/git-main").Password }}
+[rerere]
+  enabled = true
 
 {{- if eq .chezmoi.os "windows" -}}
 [core]
