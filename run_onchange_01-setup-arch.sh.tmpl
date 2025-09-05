@@ -25,19 +25,14 @@ function yayInstall {
 }
 
 # Arch specific
-yayInstall base-devel
-yayInstall brave-bin
-
-{{- end }}
-
 yayInstall azure-cli
+yayInstall brave-bin
 yayInstall oniguruma # used by Bat
 yayInstall bat
 yayInstall dotnet-sdk
 yayInstall evolution
 yayInstall fish
 yayInstall fzf
-yayInstall git
 yayInstall jq
 yayInstall less
 yayInstall man-db
@@ -47,4 +42,7 @@ yayInstall ripgrep
 yayInstall ttf-firacode-nerd
 yayInstall ttf-nerd-fonts-symbols-mono
 yayInstall visual-studio-code-bin
+
+{{- end }}
+
 {{- end }}

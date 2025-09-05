@@ -1,0 +1,54 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+{{- if eq .chezmoi.osRelease.id "arch" }}
+
+function pacmanInstall {
+  local app="$1"
+
+#  if ! command -v "$cmd" >/dev/null 2>&1; then
+  if ! pacman -Q "$app" >/dev/null 2>&1; then
+    echo "ℹ️ Installing $app..."
+    if ! pacman -Sy "$app"; then
+      echo "⚠️ Failed to install $app, continuing..."
+      return 0
+    fi
+  else
+    echo "✔️ $app is already installed"
+  fi
+}
+
+sudo pacman -Syu # update the system :)
+
+pacmanInstall base-devel
+pacmanInstall git
+
+
+if ! command -v "rustup" >/dev/null 2>&1; then
+  echo "ℹ️ Installing rustup..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else
+  echo "✔️ rustup is already installed"
+fi
+
+if ! command -v "yay" >/dev/null 2>&1; then
+  echo "ℹ️ Installing yay..."
+  tmpdir=$(mktemp -d)
+  git clone https://aur.archlinux.org/yay.git "$tmpdir/yay"
+  pushd "$tmpdir/yay"
+  makepkg -si --noconfirm
+  popd
+  rm -rf "$tmpdir"
+else
+  echo "✔️ yay is already installed"
+fi
+
+
+
+{{- end }}
+
+{{- end }}
