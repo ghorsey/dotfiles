@@ -2,26 +2,49 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-#IFS=$'\n\t'
-# trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+IFS=$'\n\t'
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-{{- if eq .chezmoi.osRelease.id "arch" -}}
+{{- if eq .chezmoi.osRelease.id "arch" }}
 
-function appInstall {
-  
-  if [[ $# -lt 1 ]]; then
-    echo "Invalid appInstall argument is missing"
-    return 1
-  fi
-
+function yayInstall {
   local app="$1"
 
-  if ! command -v $app >/dev/null 2>&1; then
-    yay -Sy $app
+#  if ! command -v "$cmd" >/dev/null 2>&1; then
+  if ! yay -Q "$app" >/dev/null 2>&1; then
+    echo "ℹ️ Installing $app..."
+    if ! yay -Sy "$app"; then
+      echo "⚠️ Failed to install $app, continuing..."
+      return 0
+    fi
+  else
+    echo "✔️ $app is already installed"
   fi
+
+
 }
 
-{{- end -}}
+# Arch specific
+yayInstall base-devel
+yayInstall brave-bin
 
-appInstall evolution
-{{- end -}}
+{{- end }}
+
+yayInstall azure-cli
+yayInstall oniguruma # used by Bat
+yayInstall bat
+yayInstall dotnet-sdk
+yayInstall evolution
+yayInstall fish
+yayInstall fzf
+yayInstall git
+yayInstall jq
+yayInstall less
+yayInstall man-db
+yayInstall onedrive-abraunegg
+yayInstall podman
+yayInstall ripgrep
+yayInstall ttf-firacode-nerd
+yayInstall ttf-nerd-fonts-symbols-mono
+yayInstall visual-studio-code-bin
+{{- end }}
