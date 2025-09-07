@@ -3,44 +3,62 @@
 	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	lg = lg1
+
 [pull]
 	rebase = true
+
 [init]
 	defaultBranch = main
+
 [log]
 	date = local
+
 [user]
-  name = {{ (keepassxc "chezmoi/git-main").UserName }}
-  email = {{ (keepassxc "chezmoi/git-main").Password }}
+{{- if ne .chezmoi.hostname "2MQ45115JV" }}
+  name = {{ (keepassxc "git/main").UserName }}
+  email = {{ (keepassxc "git/main").Password }}
+{{- else }}
+  name = {{ (keepassxc "git/work-ipc").UserName }}
+  email = {{ (keepassxc "git/work-ipc").Password }}
+{{- end }}
+
 [rerere]
   enabled = true
+
 {{ if eq .chezmoi.os "windows" -}}
-[core]
-  autocrlf = true
 [difftool "bc"]
 	path = c:/Program Files/Beyond Compare 4/bcomp.exe
+
 [mergetool "bc"]
 	path = c:/Program Files/Beyond Compare 4/bcomp.exe
+
 [diff]
 	tool = bc
+
 [merge]
 	tool = bc
+
 [mergetool]
 	keepBackup = false
 {{ end -}}
 
-{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "linux" -}}
+
 [diff]
   tool = nvimdiff
+
 [merge]
   tool = nvimdiff
   conflitstyle = diff3
+
 [mergetool]
   keepBackup = false
   trustExitCode = false
   prompt = true
+
 [difftool]
   prompt = false
+
 [mergetool "nvimdiff"]
   layout = LOCAL,BASE,REMOTE / MERGED
-{{ end }}
+{{ end -}}

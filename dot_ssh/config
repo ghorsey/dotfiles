@@ -1,0 +1,14 @@
+# This is the account for ghorsey on github.com.
+Host github.personal
+    HostName github.com
+    User git
+    # This is the key pair registered for main with github.com.
+    IdentityFile ~/.ssh/id_ed25519-main
+    IdentitiesOnly yes
+# This is the account for streaming on git.example.org.
+Host github.streaming
+    HostName github.com
+    User git
+    # This is the key pair registered for jefedeltodos with github.com.
+    IdentityFile ~/.ssh/id_ed25519-streaming
+    IdentitiesOnly yes

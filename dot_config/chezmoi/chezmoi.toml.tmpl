@@ -1,14 +1,2 @@
-{{- if eq .chezmoi.os "windows" -}}
-{{- if eq .chezmoi.hostname "2MQ45115JV" -}}
 [keepassxc]
-  database = "{{ .chezmoi.homeDir }}/OneDrive - Independent Purchasing Cooperative, Inc/IPC.kdbx"
-{{- else -}}
-[keepassxc]
-  database = "{{ .chezmoi.homeDir }}/OneDrive/Passwords/JefeDelTodos.kdbx"
-{{- end -}}
-{{- end -}}
-
-{{- if eq .chezmoi.os "linux" -}}
-[keepassxc]
-  database = "{{ .chezmoi.homeDir }}/OneDrive/personal/Passwords/JefeDelTodos.kdbx"
-{{- end -}}
+  database = "{{ .chezmoi.homeDir }}/.config/creds.kdbx"
