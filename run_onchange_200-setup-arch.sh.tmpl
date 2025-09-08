@@ -13,7 +13,7 @@ function yayInstall {
 #  if ! command -v "$cmd" >/dev/null 2>&1; then
   if ! yay -Q "$app" >/dev/null 2>&1; then
     echo "ℹ️ Installing $app..."
-    if ! yay -Sy "$app"; then
+    if ! yay -Sy "$app" --noconfirm; then
       echo "⚠️ Failed to install $app, continuing..."
       return 0
     fi
