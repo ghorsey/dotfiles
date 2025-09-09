@@ -7,13 +7,23 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 {{- if eq .chezmoi.osRelease.id "arch" }}
 
+function setFishShell {
+  local fish_path=$(command -v fish)
+
+  if [[ "$SHELL" == *"fish" ]] || [[ "$(ps -p $$ -o comm=)" == "fish" ]]; then
+    echo "✔️🐟 shell is already in use!"
+  else
+    echo "ℹ️Setting 🐟 shell as the default"
+  fi
+}
+
 function pacmanInstall {
   local app="$1"
 
 #  if ! command -v "$cmd" >/dev/null 2>&1; then
   if ! pacman -Q "$app" >/dev/null 2>&1; then
     echo "ℹ️ Installing $app..."
-    if ! pacman -Sy "$app" --noconfirm; then
+    if ! sudo pacman -Sy "$app" --noconfirm; then
       echo "⚠️ Failed to install $app, continuing..."
       return 0
     fi
@@ -27,7 +37,9 @@ sudo pacman -Syu # update the system :)
 pacmanInstall base-devel
 pacmanInstall git
 pacmanInstall fish
+pacmanInstall starship
 
+setFishShell
 
 if ! command -v "rustup" >/dev/null 2>&1; then
   echo "ℹ️ Installing rustup..."
