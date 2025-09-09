@@ -11,9 +11,10 @@ function setFishShell {
   local fish_path=$(command -v fish)
 
   if [[ "$SHELL" == *"fish" ]] || [[ "$(ps -p $$ -o comm=)" == "fish" ]]; then
-    echo "✔️🐟 shell is already in use!"
+    echo "🐟 shell is already in use!"
   else
     echo "ℹ️Setting 🐟 shell as the default"
+    sudo chsh -s "$FISH_PATH"
   fi
 }
 
@@ -36,10 +37,9 @@ sudo pacman -Syu # update the system :)
 
 pacmanInstall base-devel
 pacmanInstall git
+pacmanInstall keepassxc
 pacmanInstall fish
 pacmanInstall starship
-
-setFishShell
 
 if ! command -v "rustup" >/dev/null 2>&1; then
   echo "ℹ️ Installing rustup..."
@@ -60,6 +60,7 @@ else
   echo "✔️ yay is already installed"
 fi
 
+setFishShell
 
 
 {{- end }}
