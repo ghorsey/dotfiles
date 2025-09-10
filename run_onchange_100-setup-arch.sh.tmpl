@@ -8,13 +8,13 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 {{- if eq .chezmoi.osRelease.id "arch" }}
 
 function setFishShell {
-  local fish_path=$(command -v fish)
+  local FISH_PATH=$(command -v fish)
 
   if [[ "$SHELL" == *"fish" ]] || [[ "$(ps -p $$ -o comm=)" == "fish" ]]; then
     echo "🐟 shell is already in use!"
   else
     echo "ℹ️Setting 🐟 shell as the default"
-    sudo chsh -s "$FISH_PATH"
+    chsh -s "$FISH_PATH"
   fi
 }
 
@@ -40,6 +40,7 @@ pacmanInstall git
 pacmanInstall keepassxc
 pacmanInstall fish
 pacmanInstall starship
+pacmanInstall wezterm
 
 if ! command -v "rustup" >/dev/null 2>&1; then
   echo "ℹ️ Installing rustup..."
@@ -62,6 +63,8 @@ fi
 
 setFishShell
 
+bob install stable
+bob use stable
 
 {{- end }}
 
