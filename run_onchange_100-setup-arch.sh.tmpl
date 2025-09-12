@@ -33,7 +33,7 @@ function pacmanInstall {
   fi
 }
 
-sudo pacman -Syu # update the system :)
+sudo pacman -Syu --noconfirm # update the system :)
 
 pacmanInstall base-devel
 pacmanInstall git
