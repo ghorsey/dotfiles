@@ -26,6 +26,9 @@
   enabled = true
 
 {{ if eq .chezmoi.os "windows" -}}
+[core]
+autocrlf = true
+
 [difftool "bc"]
 	path = c:/Program Files/Beyond Compare 4/bcomp.exe
 
@@ -43,6 +46,9 @@
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
+
+[core]
+autocrlf = input
 
 [diff]
   tool = nvimdiff
