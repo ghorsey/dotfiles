@@ -23,7 +23,7 @@
 [credential]
 	azreposCredentialType = oauth
 [credential "azrepos:org/ipcoop-paas"]
-	azureAuthority = <<need to save>>
+	azureAuthority = {{ (keepassxc "git/work-ipc").Url }}
 	username = {{ (keepassxc "git/work-ipc").Password }}
 [credential "azrepos:org/ipcoop"]
 	username = {{ (keepassxc "git/work-ipc").Password }}
