@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
 
-echo "hello buttercup!"
-
 set -euo pipefail
 IFS=$'\n\t'
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
@@ -43,6 +41,7 @@ yayInstall librewolf-bin
 yayInstall man-db
 yayInstall obs-studio
 yayInstall obs-backgroundremoval 
+yayInstall obs-source-record
 yayInstall onedrive-abraunegg
 yayInstall pay-respects-bin
 yayInstall podman
