@@ -20,6 +20,13 @@
 {{- else }}
   name = {{ (keepassxc "git/work-ipc").UserName }}
   email = {{ (keepassxc "git/work-ipc").Password }}
+[credential]
+	azreposCredentialType = oauth
+[credential "azrepos:org/ipcoop-paas"]
+	azureAuthority = <<need to save>>
+	username = {{ (keepassxc "git/work-ipc").Password }}
+[credential "azrepos:org/ipcoop"]
+	username = {{ (keepassxc "git/work-ipc").Password }}
 {{- end }}
 
 [rerere]
