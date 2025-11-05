@@ -1,3 +1,4 @@
+{{- if ne .chezmoi.hostname "2MQ45115JV" -}}
 # This is the account for ghorsey on github.com.
 Host github.personal
     HostName github.com
@@ -12,3 +13,4 @@ Host github.streaming
     # This is the key pair registered for jefedeltodos with github.com.
     IdentityFile ~/.ssh/id_ed25519-streaming
     IdentitiesOnly yes
+{{- end -}}
