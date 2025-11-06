@@ -1,5 +1,5 @@
 {{- if ne .chezmoi.hostname "2MQ45115JV" -}}
-{{ keepassxcAttachment "git/main" "id_ed25519" | trim }}
+{{ keepassxcAttachment "git/main" "id_ed25519" }}
 {{- else -}}
-{{ keepassxcAttachment "git/work-ipc" "id_ed25519" | trim }}
+{{ keepassxcAttachment "git/work-ipc" "id_ed25519" }}
 {{- end -}}
