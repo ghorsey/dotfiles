@@ -81,6 +81,11 @@ vim.opt.foldlevel = 99                               -- Start with all folds ope
 vim.opt.splitbelow = true                            -- Horizontal splits go below
 vim.opt.splitright = true                            -- Vertical splits go right
 
+-- Performance Improvements
+vim.opt.redrawtime = 10000
+vim.opt.maxmempattern = 20000
+
+
 -- Key mappings
 vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
@@ -134,3 +139,47 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 
 -- Quick config editing
 vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua<CR>", { desc = "Edit config" })
+
+-- ================================================================================================
+-- Useful Functions
+-- ================================================================================================
+
+-- Copy Full File-Path
+-- vim.keymap.set("n", "<leader>pa", function()
+--  local path = vim.fn.expand("%:p")
+--  vim.fn.setreg("+", path)
+--  print("file: ", path)
+--end)
+
+-- Basic autocommands
+local augroup = vim.api.nvim_create_augroup("UserConfig", {})
+
+-- Highlight yanked text
+--vim.api.nvim_create_autocmd("TextYankPost", {
+--  group = augroup,
+--  callback = function()
+--    vim.highlight.on_yank()
+--  end,
+--})
+
+-- Return to last edit position when opening files
+--vim.api.nvim_creat_autocmd("BufReadPost", {
+--  group = augroup,
+--  callback = function() {
+--    local mark = vim.api.nvim_bug_get_mark(0, '"')
+--    local count = vim.api.nvim_buf_line_count(0)
+--    if mark[1] > 0 and mark[1] <= count then
+--      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--    end
+--  end,
+--})
+
+-- Auto-resize splits when window is resized
+--vim.api.nvim_create_autocmd("VimResized", {
+--  group = augroup,
+--  callback = function()
+--    vim.cmd("tabdo wincmd=")
+--  end,
+--})
+
+
