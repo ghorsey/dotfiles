@@ -6,6 +6,8 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
+$PSStyle.FileInfo.Directory = ''
+
 # Pay Respects
 function f {
         try {
