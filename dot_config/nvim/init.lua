@@ -113,8 +113,8 @@ vim.keymap.set("n", "<C-k>", "<C-k>h", { desc = "Move to top window" })
 vim.keymap.set("n", "<C-j>", "<C-j>h", { desc = "Move to right window" })
 
 -- Spliting & Resizing
-vim.keymap.set("n", "<leader>V", ":vsplit<CR>", { desc = "Split window vertically" })
-vim.keymap.set("n", "<leader>H", ":split<CR>", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>|", "<cmd>vsplit<CR>", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Split window horizontally" })
 vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Increase window height" })
@@ -155,12 +155,23 @@ vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua<CR>", { desc = "Ed
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 -- Highlight yanked text
---vim.api.nvim_create_autocmd("TextYankPost", {
---  group = augroup,
---  callback = function()
---    vim.highlight.on_yank()
---  end,
---})
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- Create directories when saving files
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup,
+  callback = function()
+    local dir = vim.fn.expand('<afile>:p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+  end,
+})
 
 -- Return to last edit position when opening files
 --vim.api.nvim_creat_autocmd("BufReadPost", {

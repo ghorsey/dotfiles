@@ -21,8 +21,15 @@ config.color_scheme = 'Batman'
 -- https://www.youtube.com/watch?v=V1X4WQTaxrc
 -- These settings are from this video
 
+-- config.window_decorations = "RESIZE"
+
 -- multiplexing
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
+
+
+{{ if eq .chezmoi.os "windows" }}
+config.default_prog = { 'pwsh.exe' }
+{{ end }}
 
 config.keys = {
   {
@@ -47,12 +54,12 @@ config.keys = {
   },
   {
     mods = "LEADER",
-    key = "V",
+    key = "-",
     action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" },
   },
   {
-    mods = "LEADER",
-    key = "H",
+    mods = "LEADER|SHIFT",
+    key = "|",
     action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" },
   },
   {
