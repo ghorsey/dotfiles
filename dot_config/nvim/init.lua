@@ -9,6 +9,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 require("config.opts")
 require("config.keymaps")
 require("config.lazy")
+require("config.lsp")
 
 
 -- ================================================================================================
