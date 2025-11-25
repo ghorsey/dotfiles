@@ -1,15 +1,12 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+--local session_manager = wezterm.plugin.require("https://github.com/danielcopper/wezterm-session-manager")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices.
 config.default_workspace = "~"
-workspace_switcher.apply_to_config(config)
-wezterm.log_info 'Set workspace switcher config'
 
 -- For example, changing the initial geometry for new windows:
 config.initial_cols = 120
@@ -116,42 +113,8 @@ config.keys = {
 
   -- prompt for a workspace
   {
-    key = "w",
     mods = "ALT",
-    action = wezterm.action_callback(function(win, pane)
-      resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
-      wezterm.log_info "Saved workspace"
-    end),
-  },
-  {
-    key = "r",
-    mods = "ALT",
-    action = wezterm.action_callback(function(win, pane)
-       resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
-        local type = string.match(id, "^([^/]+)") -- match before '/'
-        id = string.match(id, "([^/]+)$") -- match after '/'
-        id = string.match(id, "(.+)%..+$") -- remove file extention
-        local opts = {
-          relative = true,
-          restore_text = true,
-          on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-        }
-        if type == "workspace" then
-          local state = resurrect.state_manager.load_state(id, "workspace")
-          resurrect.workspace_state.restore_workspace(state, opts)
-        elseif type == "window" then
-          local state = resurrect.state_manager.load_state(id, "window")
-          resurrect.window_state.restore_window(pane:window(), state, opts)
-        elseif type == "tab" then
-          local state = resurrect.state_manager.load_state(id, "tab")
-          resurrect.tab_state.restore_tab(pane:tab(), state, opts)
-        end
-      end)     
-    end),
-  },
-  {
-    mods = "LEADER",
-    key = "w",
+    key = "n",
     action = act.PromptInputLine {
       description = wezterm.format {
         { Attribute = { Intensity = "Bold" } },
