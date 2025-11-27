@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
       vim.keymap.set('i', '<C-space>', vim.lsp.completion.get, { desc = 'trigger autocomplete' })
+      vim.keymap.set('i', '<Tab>', 'pumvisible() ? "<C-y>" : "<C-Tab>"', { noremap = true, expr = true, desc = 'insert highlighted item' })
     end
   end,
 })
