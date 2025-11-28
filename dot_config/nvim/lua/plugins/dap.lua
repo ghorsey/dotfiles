@@ -77,7 +77,15 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information.
-      handlers = {},
+      handlers = {
+        function(config)
+          -- All sources with no handler get passed here
+
+          -- Keep original functionality
+          require('main-nvim-dap').default_setup(config)
+        end,
+        -- add lang here: python=function(config) ... end
+      },
 
       ensure_installed = {
         "bash",
