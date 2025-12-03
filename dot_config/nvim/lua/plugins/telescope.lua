@@ -21,27 +21,27 @@ return {
     {
       '<leader>ff',
       require('telescope.builtin').find_files,
-      { desc = 'Telescope find files' },
+      desc = 'Telescope find files',
     },
     {
       '<leader>fg',
       require('telescope.builtin').live_grep,
-      { desc = 'Telescope live grep' },
+      desc = 'Telescope live grep',
     },
     {
       '<leader>fb',
       require('telescope.builtin').buffers,
-      { desc = 'Telescope buffers' },
+      desc = 'Telescope buffers',
     },
     {
       '<leader>fh',
       require('telescope.builtin').help_tags,
-      { desc = 'Telescope help tags' },
+      desc = 'Telescope help tags',
     },
     {
       '<C-p>',
       require('telescope.builtin').lsp_workspace_symbols,
-      { desc = 'Telescope LSP workspace symbols' },
+      desc = 'Telescope LSP workspace symbols',
     },
   },
 }
