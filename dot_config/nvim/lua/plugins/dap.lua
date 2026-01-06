@@ -82,7 +82,7 @@ return {
           -- All sources with no handler get passed here
 
           -- Keep original functionality
-          require('main-nvim-dap').default_setup(config)
+          require('mason-nvim-dap').default_setup(config)
         end,
         -- add lang here: python=function(config) ... end
       },
