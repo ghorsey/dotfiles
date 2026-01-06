@@ -11,6 +11,14 @@ require("config.keymaps")
 require("config.lazy")
 require("config.lsp")
 
+-- Determine OS
+-- https://github.com/mfussenegger/nvim-dap/discussions/1156#discussioncomment-13773726
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+	vim.opt.shellslash = false -- Enable shellslash for Windows compatibility
+	vim.defer_fn(function()
+		vim.opt.shellslash = false
+	end, 5000)
+end
 
 -- ================================================================================================
 -- Useful Functions
