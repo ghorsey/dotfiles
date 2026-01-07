@@ -20,6 +20,9 @@ if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	end, 5000)
 end
 
+vim.fn.sign_define('DapBreakpoint', { text='🔴' })
+vim.fn.sign_define('DapBreakpointCondition', { text='🟠' })
+
 -- ================================================================================================
 -- Useful Functions
 -- ================================================================================================
