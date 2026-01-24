@@ -1,5 +1,5 @@
 return {
-  'nvim-telescope/telescope.nvim', tag = 'v0.1.9',
+  'nvim-telescope/telescope.nvim', version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-fzy-native.nvim',

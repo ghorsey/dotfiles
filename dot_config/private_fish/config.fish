@@ -14,3 +14,4 @@ bob complete fish | source
 pay-respects fish --alias | source
 
 zoxide init fish | source
+

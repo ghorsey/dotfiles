@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env fish
+
+fisher install jorgebucaran/nvm.fish
+
+nvm install lts
+
+nvm use lts
+
+{{- if eq .chezmoi.osRelease.id "arch" }}
+
+
+{{- end }}
+
+{{- end }}
