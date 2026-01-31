@@ -88,6 +88,7 @@ return {
       },
 
       ensure_installed = {
+        "chrome",
         "bash",
         "codelldb",
         "coreclr",
