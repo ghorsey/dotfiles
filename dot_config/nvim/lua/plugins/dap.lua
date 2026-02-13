@@ -70,31 +70,63 @@ return {
     local dap = require "dap"
     local dapui = require "dapui"
 
-    require("mason-nvim-dap").setup {
-      -- Makes best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_installation = true,
+    for _, adapterType in ipairs({ "node", "chrome", "msedge" }) do
+      local pwaType = "pwa-" .. adapterType
 
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information.
-      handlers = {
-        function(config)
-          -- All sources with no handler get passed here
-
-          -- Keep original functionality
-          require('mason-nvim-dap').default_setup(config)
-        end,
-        -- add lang here: python=function(config) ... end
-      },
-
-      ensure_installed = {
-        "chrome",
-        "bash",
-        "codelldb",
-        "coreclr",
-        "js",
+      dap.adapters[pwaType] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "node",
+          args = {
+            vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+            "${port}"
+          },
+        },
       }
-    }
+    end
+
+    local enter_launch_url = function()
+      local co = coroutine.running()
+
+      return coroutine.create(function()
+        vim.ui.input({ prompt = "Enter URL: ", default = "http://localhost:" }, function(url)
+          if url == nil or url == "" then
+            return
+          else
+            coroutine.resume(co, url)
+          end
+        end)
+      end)
+    end
+
+
+    -- require("mason-nvim-dap").setup {
+    --   -- Makes best effort to setup the various debuggers with
+    --   -- reasonable debug configurations
+    --   automatic_installation = true,
+    --
+    --   -- You can provide additional configuration to the handlers,
+    --   -- see mason-nvim-dap README for more information.
+    --   handlers = {
+    --     function(config)
+    --       -- All sources with no handler get passed here
+    --
+    --       -- Keep original functionality
+    --       require('mason-nvim-dap').default_setup(config)
+    --     end,
+    --     -- add lang here: python=function(config) ... end
+    --   },
+    --
+    --   ensure_installed = {
+    --     "chrome",
+    --     "bash",
+    --     "codelldb",
+    --     "coreclr",
+    --     "js",
+    --   }
+    -- }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
