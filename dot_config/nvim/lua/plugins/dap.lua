@@ -70,6 +70,7 @@ return {
     local dap = require "dap"
     local dapui = require "dapui"
 
+    -- The js/ts debugger
     for _, adapterType in ipairs({ "node", "chrome", "msedge" }) do
       local pwaType = "pwa-" .. adapterType
 
@@ -101,7 +102,6 @@ return {
 
     local enter_launch_url = function()
       local co = coroutine.running()
-
       return coroutine.create(function()
         vim.ui.input({ prompt = "Enter URL: ", default = "http://localhost:" }, function(url)
           if url == nil or url == "" then
@@ -113,7 +113,7 @@ return {
       end)
     end
 
-    for _, language in ipairs({ "typescript", "javascript", "vue", "angular", "typescriptreact", "javscriptreact" }) do
+    for _, language in ipairs({ "typescript", "javascript", "vue", "angular", "typescriptreact", "javascriptreact" }) do
       dap.configurations[language] = {
         {
           type = "pwa-node",
@@ -134,7 +134,7 @@ return {
           request = "launch",
           name = "Launch TS Node (dap)",
           program = "${file}",
-          cwd = "$workspaceFolder",
+          cwd = "${workspaceFolder}",
           runtimeArgs = { "-r", "ts-node/register" },
         },
         {
@@ -149,13 +149,56 @@ return {
           type = "pwa-edge",
           request = "launch",
           name = "Launch Edge (Dap)",
-          url = enter_launch_url(),
+          url = enter_launch_url,
           webRoot = "${workspaceFolder}",
           sourceMaps = true,
         },
       }
 
     end
+
+    -- Dot Net
+    dap.adapters.coreclr = {
+      type = "executable",
+      command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
+      args = { '--interpreter=vscode' },
+    }
+
+    if vim.fn.has("win32") == 1 then
+      dap.adapters.coreclr.options {
+        detached = false,
+      }
+    end
+
+    local function get_dll()
+      return coroutine.create(function(dap_run_co)
+        local items = vim.fn.globpath(vim.fn.getcwd(), '**/bin/Debug/**/*.dll', 0, 1)
+        local opts = {
+          format_item = function(path)
+            return vim.fn.fnamemodify(path, ":t")
+          end,
+        }
+        local function cont(choice)
+          if choice == nil then
+            return nil
+          else
+            coroutine.resume(dap_run_co, choice)
+          end
+        end
+
+        vim.ui.select(items, opts, cont)
+      end)
+    end
+
+    dap.configurations.cs = {
+      {
+        type = "coreclr",
+        name = ".Net: Launch",
+        request = "launch",
+        cwd = "${workspaceFolder}",
+        program = get_dll,
+      }
+    }
 
 
     -- require("mason-nvim-dap").setup {
