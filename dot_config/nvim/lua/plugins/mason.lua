@@ -9,7 +9,7 @@ return {
         "bashls",
         "bicep",
         -- "copilot", -- github copilot
-        "csharp_ls",
+        -- "csharp_ls",
         "cssls",
         "dockerls",
         "eslint",
