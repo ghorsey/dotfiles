@@ -1,8 +1,9 @@
 return {
   'nvim-mini/mini.nvim',
-  version = false,
+  version = '*',
   config = function()
     require('mini.surround').setup()
     require('mini.statusline').setup()
+    require('mini.completion').setup()
   end,
 }
