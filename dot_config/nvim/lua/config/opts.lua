@@ -86,8 +86,10 @@ if vim.fn.has('win32') == 1 then
   if executable_exists("pwsh") then
     vim.opt.shell = "pwsh"
     vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
-    vim.opt.shellquote = "\""
+    vim.opt.shellquote = ""
     vim.opt.shellxquote = ""
+    vim.opt.shellpipe = "| Out-File -Encoding UTF8 %s"
+    vim.opt.shellredir = "| Out-File -Encoding UTF8 %s"
   else
     vim.notify("PowerShell 7 (pwsh) was not found in PATH. Using default shell.", vim.log.levels.WARN)
   end
