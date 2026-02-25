@@ -4,7 +4,7 @@ return {
   config = function()
     require("project_nvim").setup({
       -- Patterns used to detect root
-      patterns = { ".git", "Makefile", "package.json", "pyproject.toml" },
+      patterns = { ".git", "Makefile", "package.json", "pyproject.toml", ".vscode" },
       -- Optional: show hidden files in Telescope
       show_hidden = true,
       -- Optional: ignore certain directories
