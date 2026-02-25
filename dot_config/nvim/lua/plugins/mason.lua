@@ -7,9 +7,8 @@ return {
         "azure_pipelines_ls",
         "bashls",
         "bicep",
-        "roslyn",
+        -- "roslyn", -- need to manually install this
         -- "copilot", -- github copilot
-        -- "csharp_ls",
         "cssls",
         "dockerls",
         "eslint",
