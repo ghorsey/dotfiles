@@ -2,15 +2,13 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     config = function()
-      local mason = require("mason")
-
-      mason.setup({
-        registeries = {
+      require("mason").setup({
+        registries = {
           "github:mason-org/mason-registry",
           "github:Crashdummyy/mason-registry",
-        }
+        },
       })
-    end,
+    end
     opts = {
       ensure_installed = {
         "angularls",
