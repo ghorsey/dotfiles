@@ -1,13 +1,23 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
+    config = function()
+      local mason = require("mason")
 
+      mason.setup({
+        registeries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry",
+        }
+      })
+    end,
     opts = {
       ensure_installed = {
         "angularls",
         "azure_pipelines_ls",
         "bashls",
         "bicep",
+        "roslyn",
         -- "copilot", -- github copilot
         -- "csharp_ls",
         "cssls",
@@ -23,7 +33,6 @@ return {
         "vue_ls",
         "yamlls",
       },
-
     },
     dependencies = {
       { "mason-org/mason.nvim", opts = {
