@@ -8,7 +8,7 @@ return {
           "github:Crashdummyy/mason-registry",
         },
       })
-    end
+    end,
     opts = {
       ensure_installed = {
         "angularls",
