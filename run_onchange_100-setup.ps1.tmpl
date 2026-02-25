@@ -71,7 +71,7 @@ function CreateAlias
     [string]$Path
   )
   CreateFunction -Name "Invoke_$Alias" -Command $Command -Path $Path
-  WriteFile -Path $Path -Value "Set-Alias -Name $Alias -Value Invoke_$Alias"
+  WriteFile -Path $Path -Value "Set-Alias -Name $Alias -Value Invoke_$Alias -Force"
 }
 
 function CreateFolderJunction
