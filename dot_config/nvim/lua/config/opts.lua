@@ -77,3 +77,19 @@ vim.opt.splitright = true                            -- Vertical splits go right
 -- Performance Improvements
 vim.opt.redrawtime = 10000
 vim.opt.maxmempattern = 20000
+
+if vim.fn.has('win32') == 1 then
+  local function executable_exists(exec)
+    return vim.fn.executable(exec) == 1
+  end
+
+  if executable_exists("pwsh") then
+    vim.opt.shell = "pwsh"
+    vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+    vim.opt.shellquote = "\""
+    vim.opt.shellxquote = ""
+  else
+    vim.notify("PowerShell 7 (pwsh) was not found in PATH. Using default shell.", vim.log.levels.WARN)
+  end
+end
+
