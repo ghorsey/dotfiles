@@ -161,7 +161,8 @@ CreateFolderJunction -Source "$HOME\.config\nvim" "$env:LocalAppData\nvim"
 # CreateAlias -Alias "c" -Path $profile -Command "clear"
 # CreateAlias -Alias "cat" -Path $profile -Command "bat"
 # CreateAlias -Alias "ls" -Path $profile -Command "eza"
-# CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
+CreateAlias -Alias "touch" -Command "coreutils touch" -Path $PROFILE
+CreateAlias -Alias "tee" -Command "coreutils tee" -Path $PROFILE
 # CreateAlias -Alias "mkdir" -Command "coreutils mkdir" -Path $PROFILE
 # CreateAlias -Alias "rm" -Command "coreutils rm" -Path $PROFILE
 # CreateAlias -Alias "rmdir" -Command "coreutils rmdir" -Path $PROFILE
