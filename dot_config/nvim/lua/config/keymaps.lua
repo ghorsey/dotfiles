@@ -53,5 +53,5 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua<CR>", { desc = "Edit config" })
 
 -- Quickfix navigation
-vim.keymap.set({ "n", "i"}, "<M-j>", ":cnext<CR>", { desc = "Quickfix next" })
-vim.keymap.set({ "n", "i"}, "<M-k>", ":cprevious<CR>", { desc = "Quickfix Previous" })
+vim.keymap.set({ "n", "i"}, "<C-M-j>", ":cnext<CR>", { desc = "Quickfix next" })
+vim.keymap.set({ "n", "i"}, "<C-M-k>", ":cprevious<CR>", { desc = "Quickfix Previous" })
