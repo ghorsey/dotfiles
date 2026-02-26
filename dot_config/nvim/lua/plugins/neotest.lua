@@ -12,8 +12,8 @@ return {
     },
     opts = {
       adapters = {
-        require("neotest-jest")({}),
-        require("neotest-vstest"),
+        "neotest-jest" = {},
+        "neotest-vstest" = {},
       },
     },
     keys = {
@@ -24,6 +24,7 @@ return {
       { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
       { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
       { "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
+      { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" }
     },
   },
 }
