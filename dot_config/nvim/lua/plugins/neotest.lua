@@ -12,8 +12,8 @@ return {
     },
     opts = {
       adapters = {
-        "neotest-jest" = {},
-        "neotest-vstest" = {},
+        ["neotest-jest"] = {},
+        ["neotest-vstest"] = {},
       },
     },
     keys = {
