@@ -1,5 +1,16 @@
 return {
-  root_markers = { 'azure-pipelines.yml', '.azure-pipeline', '.azure-pipelines' },
+  root_markers = {
+    'azure-pipelines.yml',
+    'azure-pipeline.yml',
+    '.azure-pipeline',
+    '.azure-pipelines',
+    'azure-pipeline',
+    'azure-pipelines',
+    'build',
+    'ci',
+    'ci-cd',
+    'devops',
+  },
   settings = {
     yaml = {
       schemas = {
