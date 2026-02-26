@@ -55,3 +55,6 @@ vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua<CR>", { desc = "Ed
 -- Quickfix navigation
 vim.keymap.set({ "n", "i"}, "<C-M-j>", ":cnext<CR>", { desc = "Quickfix next" })
 vim.keymap.set({ "n", "i"}, "<C-M-k>", ":cprevious<CR>", { desc = "Quickfix Previous" })
+
+-- Build/Make Project
+vim.keymap.set({ "n", "i"}, "<C-B>", ":make<CR>", { desc = "Build the project" })
