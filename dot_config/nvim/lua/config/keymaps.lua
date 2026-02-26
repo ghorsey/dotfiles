@@ -57,4 +57,4 @@ vim.keymap.set({ "n", "i"}, "<C-M-j>", ":cnext<CR>", { desc = "Quickfix next" })
 vim.keymap.set({ "n", "i"}, "<C-M-k>", ":cprevious<CR>", { desc = "Quickfix Previous" })
 
 -- Build/Make Project
-vim.keymap.set({ "n", "i"}, "<C-B>", ":make<CR>", { desc = "Build the project" })
+vim.keymap.set({ "n", "i"}, "<C-S-b>", ":make<CR>", { desc = "Build the project" })
