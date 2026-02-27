@@ -2,6 +2,12 @@
 vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
 
+-- Save buffers
+vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save the current buffer" })
+vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save the current buffer" })
+vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all open buffers" })
+vim.keymap.set("i", "<C-S-s>", "<ESC>:wa<CR>a", { desc = "Save all open buffers" })
+
 -- Normal mode mappings
 vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
