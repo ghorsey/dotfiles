@@ -19,6 +19,7 @@ return {
         "markdown_oxide",
         "rust_analyzer",
         "ts_ls",
+        "vimls",
         "vue_ls",
         "yamlls",
       },
