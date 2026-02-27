@@ -51,6 +51,7 @@ return {
             key = "g",
           },
           { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
+          { action = "Mason", desc = " Mason", icon = " ", key = "m" },
           {
             action = function()
               vim.api.nvim_input("<cmd>qa<cr>")
