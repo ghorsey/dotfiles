@@ -6,13 +6,13 @@ return {
     require('mini.statusline').setup()
     require('mini.completion').setup({
       window = {
-        info = { height = 25, width = 80, border = "shadow" },
-        signature = { height = 25, width = 80, border = "shadow" },
+        info = { height = 25, width = 80, border = "rounded" },
+        signature = { height = 25, width = 80, border = "rounded" },
       },
-      mappings = {
-        force_twostep = "<C-@>",
-        force_fallback = "<leader><C-@>",
-      },
+      -- mappings = {
+      --   force_twostep = "<C-@>",
+      --   force_fallback = "<leader><C-@>",
+      -- },
     })
   end,
 }

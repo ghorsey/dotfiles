@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
+  enabled = false,
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
@@ -13,7 +14,11 @@ return {
       function()
         require('dap').continue()
       end,
-      desc = 'Debug: Start/Continue',
+      {
+        noremap = true,
+        silent = true,
+        desc = 'Debug: Start/Continue',
+      },
     },
     {
       '<S-F5>',
