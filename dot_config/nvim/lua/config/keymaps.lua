@@ -2,32 +2,29 @@
 vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
 
--- Toggle terminal
-vim.keymap.set({ "n", "i", "v" }, "<C-`>", function() Snacks.terminal() end, { desc = "Toggle the terminal" })
-
 -- Save buffers
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save the current buffer" })
 vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save the current buffer" })
-vim.keymap.set("n", "<C-S-s>", ":wa<CR>", { desc = "Save all open buffers" })
+vim.keymap.set( "n","<C-S-s>", ":wa<CR>", { desc = "Save all open buffers" })
 vim.keymap.set("i", "<C-S-s>", "<ESC>:wa<CR>a", { desc = "Save all open buffers" })
 
--- Normal mode mappings
-vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+-- Quit neovim
+vim.keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close the current window" })
+vim.keymap.set("i", "<C-q>", "<ESC>:q<CR>", { desc = "Close the current window" })
+vim.keymap.set("n", "<C-S-q>", ":qa<CR>", { desc = "Close all windows" })
+vim.keymap.set("i", "<C-S-q>", "<ESC>:qa<CR>", { desc = "Close all windows" })
 
 -- Center screen when jumping
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
+vim.keymap.set("n", "n", "nzz", { desc = "Next search result (centered)" })
+vim.keymap.set("n", "N", "Nzz", { desc = "Previous search result (centered)" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
-
--- Delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 
 -- Buffer navigation
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 
--- Better window navigation
+-- Better window navigation----
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
@@ -46,6 +43,10 @@ vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line down" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- Delete without yanking
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
+
 
 -- Better indenting in visual mode
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
