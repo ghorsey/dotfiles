@@ -2,6 +2,9 @@
 vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
 
+-- Toggle terminal
+vim.keymap.set({ "n", "i", "v" }, "<C-`>", function() Snacks.terminal() end, { desc = "Toggle the terminal" })
+
 -- Save buffers
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save the current buffer" })
 vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save the current buffer" })

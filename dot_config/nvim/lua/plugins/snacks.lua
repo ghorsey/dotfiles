@@ -5,10 +5,40 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = {
+      enabled = true,
+      preset = {
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = ' ', key = "m", desc = "Mason", action = ":Mason" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
+        header = [[
+   ______          __        ______                          __ 
+  / ____/___  ____/ /__     / ____/___  _____________  _____/ /_
+ / /   / __ \/ __  / _ \   / /   / __ \/ ___/ ___/ _ \/ ___/ __/
+/ /___/ /_/ / /_/ /  __/  / /___/ /_/ / /  / /  /  __/ /__/ /_  
+\____/\____/\__,_/\___/   \____/\____/_/  /_/   \___/\___/\__/  
+           ______      ____          __  _                       
+          / ____/___  / / /__  _____/ /_(_)   _____              
+         / /   / __ \/ / / _ \/ ___/ __/ / | / / _ \             
+        / /___/ /_/ / / /  __/ /__/ /_/ /| |/ /  __/             
+        \____/\____/_/_/\___/\___/\__/_/ |___/\___/              
+        ]]
+      }
+    },
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    lazygit = {
+      enabled = true
+    },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -23,7 +53,34 @@ return {
       notification = {
         wo = { wrap = true } -- Wrap notifications
       }
-    }
+    },
+    zen = {
+      enabled = true,
+      toggles = {
+        dim = true,
+        git_signs = false,
+        mini_diff_signs = false,
+        diagnostics = false,
+        inlay_hints = false,
+        indent = true,
+        line_number = true,
+        relativenumber = true,
+        signcolumn = "no",
+      },
+      zoom = {
+        toggles = {
+          dim = true,
+          git_signs = false,
+          mini_diff_signs = false,
+          diagnostics = false,
+          inlay_hints = false,
+          indent = true,
+          line_number = true,
+          relativenumber = true,
+          signcolumn = "no",
+        }
+      },
+    },
   },
   keys = {
     -- Top Pickers & Explorer
