@@ -8,13 +8,28 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 
 ## General Keymaps
 
+### Edit config
+
+| Mode | Shortcut     | Command                          | Description |
+|------|--------------|----------------------------------|-------------|
+| n    | `<leader>rc` | `:e ~/.config/nvim/init.lua<CR>` | Edit config |
+
+### Building and Quickfix
+
+| Mode | Shortcut  | Command         | Description       |
+|------|-----------|-----------------|-------------------|
+| n, i | `<C-S-b>` | `:make<CR>`     | Build the project |
+| n, i | `<C-M-j>` | `:cnext<CR>`    | Next Quickfix     |
+| n, i | `<C-M-k>` | `:previous<CR>` | Previous quickfix |
+
+
 ### Saving
 
 | Mode | Shortcut  | Command         | Description              |
 |------|-----------|-----------------|--------------------------|
 | n    | `<C-s>`   | `:w<CR>`        | Saves the current buffer |
 | i    | `<C-s>`   | `:w<CR>`        | Saves the current buffer |
-| n    | `<C-S-s>` | `:wa<CR>`       | Saves all open buffers   |Des
+| n    | `<C-S-s>` | `:wa<CR>`       | Saves all open buffers   |
 | i    | `<C-S-s>` | `<ESC>:wa<CR>a` | Saves all open buffers   |
 
 
@@ -38,10 +53,10 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 
 ### Buffer Navigation
 
-| Mode | Shortcut             | Command      | Description     |
-|------|----------------------|--------------|-----------------|
-| n    | `<leader>bn`        | `:bnext<CR>` | Next buffer     |
-| n    | `<leader>bp`        | `:bnext<CR>` | Previous buffer |
+| Mode | Shortcut     | Command      | Description     |
+|------|--------------|--------------|-----------------|
+| n    | `<leader>bn` | `:bnext<CR>` | Next buffer     |
+| n    | `<leader>bp` | `:bnext<CR>` | Previous buffer |
 
 ### Window Navigation
 
@@ -87,5 +102,67 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 | v    | `>`      | `>gv`   | Indent right and reselect |
 
 ### Better Join behavior
-left
+
+| Mode | Shortcut | Command | Description                             |
+|------|----------|---------|-----------------------------------------|
+| n    | `J`      | `mzJ\`z`   | Join lines and keep the cursor position |
+
+## Plugins
+
+### Debugging (DAP)
+
+| Mode | Shortcut  | Description                          |
+|------|-----------|--------------------------------------|
+| n    | `<F5>`    | Debug: Start/Continue                |
+| n    | `<S-F5>`  | Debug: Stop                          |
+| n    | `<F11>`   | Debug: Step into                     |
+| n    | `<F10>`   | Debug: Step over                     |
+| n    | `<S-F11>` | Debug: Step out                      |
+| n    | `<F9>`    | Debug: Toggle breakpoint             |
+| n    | `<C-F9>`  | Debug: Toggle bonditional breakpoint |
+| n    | `<C-F5>`  | Debug: See last session result       |
+
+### Mini
+
+#### mini.surround
+
+| Mode | Shortcut | Description                     |
+|------|----------|---------------------------------|
+| n, v | `gsa`    | Add surround                    |
+| n    | `gsd`    | Delete surround                 |
+| n    | `gsf`    | Find surrounding (to the left)  |
+| n    | `gsF`    | Find surrounding (to the right) |
+| n    | `gsh`    | Hilight surrounding             |
+| n    | `gsr`    | Replace surrounding             |
+
+### Neotest
+
+| Mode | Shortcut     | Description         |
+|------|--------------|---------------------|
+| n    | `<leader>tt` | Run tests in file   |
+| n    | `<leader>tT` | Run all test files  |
+| n    | `<leader>tr` | Run nearest test    |
+| n    | `<leader>ts` | Toggle summary      |
+| n    | `<leader>to` | Show output         |
+| n    | `<leader>tO` | Toggle output panel |
+| n    | `<leader>tS` | Stop Tests          |
+| n    | `<leader>td` | Debug nearest test  |
+
+### Opencode
+| Mode | Shortcut | Description |
+|------|----------|-------------|
+| n, x | `<C-a>`  | Ask opencode... |
+| n, x | `<C-x>`  | Execute opencode action |
+| n, t | `<C-.>`  | Toggle opencode |
+| n, x | `go`     | Add range to opencode |
+| n    | `goo`    | Add line to open code |
+| n    | `<S-C-u>` | Scroll opencode up |
+| n    | `<S-C-d>` | Scroll opencode down |
+
+
+| Mode | Shortcut | Command | Description                       |
+|------|----------|---------|-----------------------------------|
+| n    | `+`      | `<C-a>` | Increment number under the cursor |
+| n    | `-`      | `<C-x>` | Decrement number under the cursor |
+
 
