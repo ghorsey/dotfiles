@@ -27,7 +27,7 @@ return {
         process_items = function(items)
           local CompletionItemKind = vim.lsp.protocol.CompletionItemKind
           local filtered = {}
-          print(vim.inspect(items))
+
           for _, item in ipairs(items) do
             if item.kind ~= CompletionItemKind.Text then
               table.insert(filtered, item)
