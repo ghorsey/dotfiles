@@ -199,26 +199,135 @@ A collection of QoL enhancements for neovim
 | n    | `<leader>e`       | File explorer        |
 
 ##### Find
-| Mode | Sortcut | Description |
-|------|---------|-------------|
-| n    | `<leader>fb` | Buffers |
+| Mode | Sortcut      | Description      |
+|------|--------------|------------------|
+| n    | `<leader>fb` | Buffers          |
 | n    | `<leader>fc` | Find config file |
-| n    | `<leader>ff` | Find files |
-| n    | `<leader>fg` | Find git files |
-| n    | `<leader>fp` | Projects |
-| n    | `<leader>fr` | Recent |
+| n    | `<leader>ff` | Find files       |
+| n    | `<leader>fg` | Find git files   |
+| n    | `<leader>fp` | Projects         |
+| n    | `<leader>fr` | Recent           |
 
 ##### Git
 
-| Mode | Sortcut | Description |
-|------|---------|-------------|
-| n    | `<leader>gb` | Git branches |
-| n    | `<leader>gl` | Git log |
-| n    | `<leader>gL` | Git log line |
-| n    | `<leader>gs` | Git status |
-| n    | `<leader>gS` | Git stash |
+| Mode | Sortcut      | Description      |
+|------|--------------|------------------|
+| n    | `<leader>gb` | Git branches     |
+| n    | `<leader>gl` | Git log          |
+| n    | `<leader>gL` | Git log line     |
+| n    | `<leader>gs` | Git status       |
+| n    | `<leader>gS` | Git stash        |
 | n    | `<leader>gd` | Git diff (hunks) |
-| n    | `<leader>gf` | Git log file |
+| n    | `<leader>gf` | Git log file     |
 
 ##### Github Cli
 
+| Mode | Sortcut      | Description               |
+|------|--------------|---------------------------|
+| n    | `<leader>gi` | GitHub issue (open)       |
+| n    | `<leader>gI` | GitHub issues (all)       |
+| n    | `<leader>gp` | GitHub pull request       |
+| n    | `<leader>gP` | Github pull request (all) |
+
+##### Grep
+
+| Mode | Sortcut      | Description              |
+|------|--------------|--------------------------|
+| n    | `<leader>sb` | Buffer lines             |
+| n    | `<leader>sB` | Grep Open Buffers        |
+| n    | `<leader>sg` | Grep                     |
+| n, x | `<leader>sw` | Visual selection or word |
+
+##### Search
+
+| Mode | Sortcut      | Description            |
+|------|--------------|------------------------|
+| n    | `<leader>s"` | Registers              |
+| n    | `<leader>s/` | Search history         |
+| n    | `<leader>sa` | Autocommands           |
+| n    | `<leader>sb` | Buffer lines           |
+| n    | `<leader>sc` | Command history        |
+| n    | `<leader>sC` | Commands               |
+| n    | `<leader>sd` | Diagnosstics           |
+| n    | `<leader>sD` | Buffer Dianostics      |
+| n    | `<leader>sh` | Help Pages             |
+| n    | `<leader>sH` | Highlights             |
+| n    | `<leader>si` | Icons                  |
+| n    | `<leader>sj` | Jumps                  |
+| n    | `<leader>sk` | Keymaps                |
+| n    | `<leader>sl` | Location list          |
+| n    | `<leader>sm` | Marks                  |
+| n    | `<leader>sM` | Man pages              |
+| n    | `<leader>sp` | Search for plugin spec |
+| n    | `<leader>sq` | Quickfix list          |
+| n    | `<leader>sR` | Resume                 |
+| n    | `<leader>su` | Undo history           |
+| n    | `<leader>uC` | Colorschemes           |
+
+##### LSP
+
+| Mode | Sortcut      | Description            |
+|------|--------------|------------------------|
+| n    | `gd`         | Goto definition        |
+| n    | `gD`         | Goto declaration       |
+| n    | `gr`         | References             |
+| n    | `gI`         | Goto implementation    |
+| n    | `gy`         | Goto t[y]pe definition |
+| n    | `gai`        | C[a]lls [i]ncoming     |
+| n    | `gao`        | C[a]lls [o]utgoing     |
+| n    | `<leader>ss` | LSP symbols            |
+| n    | `<leader>sS` | LSP workspace symbols  |
+
+
+#### Zen
+
+| Mode | Sortcut     | Description            |
+|------|-------------|------------------------|
+| n    | `<leader>z` | Toggle zen zoomed mode |
+| n    | `<leader>Z` | Toggle zen mode        |
+
+#### Scratch
+
+| Mode | Sortcut     | Description           |
+|------|-------------|-----------------------|
+| n    | `<leader>.` | Toggle scratch buffer |
+| n    | `<leader>S` | Select scratch buffer |
+
+#### Notifier
+
+| Mode | Sortcut      | Description               |
+|------|--------------|---------------------------|
+| n    | `bd`         | Delete buffer             |  
+| n    | `<leader>un` | Dismiss all notifications |
+
+#### Rename
+
+| Mode | Sortcut | Description |
+|------|---------|-------------|
+| n    | `cR`    | Rename file |
+
+#### Git Browse
+
+| Mode | Sortcut      | Description |
+|------|--------------|-------------|
+| n, v | `<leader>gB` | Git browse  |
+
+#### Lazygit
+
+| Mode | Sortcut      | Description |
+|------|--------------|-------------|
+| n    | `<leader>gg` | Lazygit     |
+
+#### Terminal
+
+| Mode | Sortcut      | Description |
+|------|--------------|-------------|
+| n    | ``<C-`>`` | Toggle terminal
+
+#### Words
+==I need to test this one...==
+
+| Mode | Sortcut | Description        |
+|------|---------|--------------------|
+| n    | `]]`    | Next Reference     |
+| n    | `[[`    | Previous Reference |
