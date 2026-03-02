@@ -325,9 +325,22 @@ A collection of QoL enhancements for neovim
 | n    | ``<C-`>`` | Toggle terminal
 
 #### Words
-==I need to test this one...==
+*I need to test this one...*
 
 | Mode | Sortcut | Description        |
 |------|---------|--------------------|
 | n    | `]]`    | Next Reference     |
 | n    | `[[`    | Previous Reference |
+
+#### Misc
+
+| Mode | Sortcut     | Description |
+|------|-------------|-------------|
+| n    | `<leader>N` | Neovim News |
+
+### Which Key
+
+| Mode | Sortcut     | Description           |
+|------|-------------|-----------------------|
+| n    | `<leader>?` | Buffer local keymaps" |
+
