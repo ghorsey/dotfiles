@@ -105,11 +105,13 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 
 | Mode | Shortcut | Command | Description                             |
 |------|----------|---------|-----------------------------------------|
-| n    | `J`      | `mzJ\`z`   | Join lines and keep the cursor position |
+| n    | `J`      | ``mzJ`z``   | Join lines and keep the cursor position |
 
 ## Plugins
 
 ### Debugging (DAP)
+
+The neovim Debugging Adapter Protocol client for neovim
 
 | Mode | Shortcut  | Description                          |
 |------|-----------|--------------------------------------|
@@ -124,6 +126,8 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 
 ### Mini
 
+A collection of minimalistic plugins to enhance neovim
+
 #### mini.surround
 
 | Mode | Shortcut | Description                     |
@@ -137,6 +141,8 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 
 ### Neotest
 
+A test runner library for neovim
+
 | Mode | Shortcut     | Description         |
 |------|--------------|---------------------|
 | n    | `<leader>tt` | Run tests in file   |
@@ -149,15 +155,18 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 | n    | `<leader>td` | Debug nearest test  |
 
 ### Opencode
-| Mode | Shortcut | Description |
-|------|----------|-------------|
-| n, x | `<C-a>`  | Ask opencode... |
-| n, x | `<C-x>`  | Execute opencode action |
-| n, t | `<C-.>`  | Toggle opencode |
-| n, x | `go`     | Add range to opencode |
-| n    | `goo`    | Add line to open code |
-| n    | `<S-C-u>` | Scroll opencode up |
-| n    | `<S-C-d>` | Scroll opencode down |
+
+A plugin to integrate opencode into neovim
+
+| Mode | Shortcut  | Description             |
+|------|-----------|-------------------------|
+| n, x | `<C-a>`   | Ask opencode...         |
+| n, x | `<C-x>`   | Execute opencode action |
+| n, t | `<C-.>`   | Toggle opencode         |
+| n, x | `go`      | Add range to opencode   |
+| n    | `goo`     | Add line to open code   |
+| n    | `<S-C-u>` | Scroll opencode up      |
+| n    | `<S-C-d>` | Scroll opencode down    |
 
 
 | Mode | Shortcut | Command | Description                       |
@@ -165,4 +174,51 @@ My neovim setup. I'm trying to be minimal with my config. I'd rather use default
 | n    | `+`      | `<C-a>` | Increment number under the cursor |
 | n    | `-`      | `<C-x>` | Decrement number under the cursor |
 
+### Persistence
+
+A session manager for neovim
+
+| Mode | Shortcut     | Description             |
+|------|--------------|-------------------------|
+| n    | `<leader>qs` | Loads a session         |
+| n    | `<leader>qS` | Select a session        |
+| n    | `<leader>ql` | Loadss the last session |
+| n    | `<leader>qd` | Stops a session         |
+
+### Snacks
+
+A collection of QoL enhancements for neovim
+
+#### Pickers
+
+##### Top Pickers and Explorer
+| Mode | Sortcut           | Description          |
+|------|-------------------|----------------------|
+| n    | `<leader><space>` | Smart find files     |
+| n    | `<leader>n`       | Notification history |
+| n    | `<leader>e`       | File explorer        |
+
+##### Find
+| Mode | Sortcut | Description |
+|------|---------|-------------|
+| n    | `<leader>fb` | Buffers |
+| n    | `<leader>fc` | Find config file |
+| n    | `<leader>ff` | Find files |
+| n    | `<leader>fg` | Find git files |
+| n    | `<leader>fp` | Projects |
+| n    | `<leader>fr` | Recent |
+
+##### Git
+
+| Mode | Sortcut | Description |
+|------|---------|-------------|
+| n    | `<leader>gb` | Git branches |
+| n    | `<leader>gl` | Git log |
+| n    | `<leader>gL` | Git log line |
+| n    | `<leader>gs` | Git status |
+| n    | `<leader>gS` | Git stash |
+| n    | `<leader>gd` | Git diff (hunks) |
+| n    | `<leader>gf` | Git log file |
+
+##### Github Cli
 
