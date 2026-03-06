@@ -1,5 +1,6 @@
 $env:PATH += ";$env:UserProfile\.cargo\bin"
 $env:PATH += ";C:\Program Files\KeePassXC"
+$env:PATH += ";C:\Program Files\LLVM\bin"
 Import-Module posh-git
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
