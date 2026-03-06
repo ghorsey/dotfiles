@@ -130,6 +130,7 @@ WingetInstall -Command "jq" -P "jqlang.jq"
 WingetInstall -Command "fd" -P "sharkdp.fd"
 WingetInstall -Command "opencode" -Package "SST.opencode"
 WingetInstall -Command "zig" -Package "zig.zig"
+WingetInstall -Command "clang" -Package "LLVM.LLVM"
 
 {{- if ne .chezmoi.hostname "2MQ45115JV" }}
 WingetInstall -Command "pcloud" -Package "pCloudAG.pCloudDrive"
