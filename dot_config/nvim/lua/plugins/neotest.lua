@@ -10,6 +10,7 @@ return {
       "nsidorenco/neotest-vstest",
       "nvim-neotest/neotest-jest",
     },
+    event = { "BufReadPost", "BufNewFile" }, 
     opts = {
       adapters = {
         ["neotest-jest"] = {},
