@@ -3,10 +3,10 @@ vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
 
 -- Save buffers
-vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save the current buffer" })
-vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save the current buffer" })
-vim.keymap.set( "n","<C-S-s>", ":wa<CR>", { desc = "Save all open buffers" })
-vim.keymap.set("i", "<C-S-s>", "<ESC>:wa<CR>a", { desc = "Save all open buffers" })
+vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save the current buffer", silent = true, })
+vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save the current buffer", silent = true, })
+vim.keymap.set( "n","<C-S-s>", ":wa<CR>", { desc = "Save all open buffers", silent = true, })
+vim.keymap.set("i", "<C-S-s>", "<ESC>:wa<CR>a", { desc = "Save all open buffers", silent = true, })
 
 -- Quit neovim
 vim.keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close the current window" })
