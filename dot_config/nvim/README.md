@@ -2,8 +2,8 @@
 My neovim setup. I'm trying to be minimal with my config. I'd rather use defaults and default capabilities.
 
 <dl>
-    <dt>&lt;leader&gt;</dt>
-    <dd>A space ` `</dd>
+    <dt>`<leader>`</dt>
+    <dd>A space <kbd> </kbd></dd>
 </dl>
 
 ## General Keymaps
@@ -160,8 +160,8 @@ A plugin to integrate opencode into neovim
 
 | Mode | Shortcut  | Description             |
 |------|-----------|-------------------------|
-| n, x | `<C-a>`   | Ask opencode...         |
-| n, x | `<C-x>`   | Execute opencode action |
+| n, x | `<leader>oa`   | Ask opencode...         |
+| n, x | `<leader>ox`   | Execute opencode action |
 | n, t | `<C-.>`   | Toggle opencode         |
 | n, x | `go`      | Add range to opencode   |
 | n    | `goo`     | Add line to open code   |
