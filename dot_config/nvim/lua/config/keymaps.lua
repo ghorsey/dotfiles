@@ -9,10 +9,10 @@ vim.keymap.set( "n","<C-S-s>", ":wa<CR>", { desc = "Save all open buffers", sile
 vim.keymap.set("i", "<C-S-s>", "<ESC>:wa<CR>a", { desc = "Save all open buffers", silent = true, })
 
 -- Quit neovim
-vim.keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close the current window" })
-vim.keymap.set("i", "<C-q>", "<ESC>:q<CR>", { desc = "Close the current window" })
-vim.keymap.set("n", "<C-S-q>", ":qa<CR>", { desc = "Close all windows" })
-vim.keymap.set("i", "<C-S-q>", "<ESC>:qa<CR>", { desc = "Close all windows" })
+vim.keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close the current window", silent = true})
+vim.keymap.set("i", "<C-q>", "<ESC>:q<CR>", { desc = "Close the current window", silent = true })
+vim.keymap.set("n", "<C-S-q>", ":qa<CR>", { desc = "Close all windows", silent = true })
+vim.keymap.set("i", "<C-S-q>", "<ESC>:qa<CR>", { desc = "Close all windows", silent = true })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzz", { desc = "Next search result (centered)" })
