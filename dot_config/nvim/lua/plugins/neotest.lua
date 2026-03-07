@@ -9,7 +9,7 @@ return {
       "nvim-neotest/neotest-vstest",
       "nvim-neotest/neotest-jest",
     },
-    config = function ()
+    init = function ()
       require("neotest").setup({
         adapters = {
           require("neotest-jest"),
