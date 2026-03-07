@@ -1,4 +1,6 @@
 return {
+  { "nvim-neotest/neotest-vstest" },
+  { "nvim-neotest/neotest-jest" },
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -6,11 +8,8 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
-      -- Test Adapters
-      "nsidorenco/neotest-vstest",
-      "nvim-neotest/neotest-jest",
     },
-    event = { "BufReadPost", "BufNewFile" }, 
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       adapters = {
         ["neotest-jest"] = {},
