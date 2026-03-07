@@ -4,8 +4,8 @@
 - `sudo cp ~/.config/onedrive/c3/onedrive-c3.service /lib/systemd/user/onedrive-c3.service`
 
 ```bash
-onedrive --reauth --config-dir ~/.config/onedrive/personal
-onedrive --reauth --config-dir ~/.config/onedrive/c3
+onedrive --reauth --configdir ~/.config/onedrive/personal
+onedrive --reauth --configdir ~/.config/onedrive/c3
 
 systemctl enable --user onedrive-personal
 systemctl enable --user onedrive-c3
