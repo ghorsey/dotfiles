@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.nvim',
-  version = '*',
-  config = function()
+  version = false,
+  init = function()
     require('mini.surround').setup({
       highlight_duration = 1000,
       mappings = {
