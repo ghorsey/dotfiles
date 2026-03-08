@@ -2,6 +2,7 @@ return {
   'nvim-mini/mini.nvim',
   version = false,
   init = function()
+    require('mini.ai').setup()
     require('mini.surround').setup({
       highlight_duration = 1000,
       mappings = {
