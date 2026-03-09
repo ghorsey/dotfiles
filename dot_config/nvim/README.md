@@ -2,8 +2,8 @@
 My neovim setup. I'm trying to be minimal with my config. I'd rather use defaults and default capabilities.
 
 <dl>
-    <dt>`<leader>`</dt>
-    <dd>A space <kbd> </kbd></dd>
+    <dt><pre>&lt;leader&gt;</pre></dt>
+    <dd>A space <kbd>&nbsp;</kbd></dd>
 </dl>
 
 ## General Keymaps
