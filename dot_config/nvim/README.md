@@ -1,11 +1,6 @@
 # Overview
 My neovim setup. I'm trying to be minimal with my config. I'd rather use defaults and default capabilities.
 
-<dl>
-    <dt><pre>&lt;leader&gt;</pre></dt>
-    <dd>A space <kbd>&nbsp;</kbd></dd>
-</dl>
-
 ## General Keymaps
 
 ### Edit config
