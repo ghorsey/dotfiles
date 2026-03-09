@@ -162,7 +162,7 @@ A plugin to integrate opencode into neovim
 |------|-----------|-------------------------|
 | n, x | `<leader>oa`   | Ask opencode...         |
 | n, x | `<leader>ox`   | Execute opencode action |
-| n, t | `<C-.>`   | Toggle opencode         |
+| n, t | `<leader>oo`   | Toggle opencode         |
 | n, x | `go`      | Add range to opencode   |
 | n    | `goo`     | Add line to open code   |
 | n    | `<S-C-u>` | Scroll opencode up      |

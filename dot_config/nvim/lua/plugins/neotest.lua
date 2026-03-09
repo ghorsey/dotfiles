@@ -6,7 +6,8 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-vstest",
+      -- Test adapters
+      "nsidorenco/neotest-vstest",
       "nvim-neotest/neotest-jest",
     },
     init = function ()
@@ -16,7 +17,6 @@ return {
           require("neotest-vstest"),
         }
       })
-      
     end,
     opts = {
       adapters = {

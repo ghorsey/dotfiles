@@ -1,5 +1,11 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main"
+    },
+  },
   lazy = false,
   build = ':TSUpdate',
   init = function()
@@ -37,7 +43,6 @@ return {
       'markdown',
       'markdown_inline',
       'mermaid',
-      -- 'norg',
       'powershell',
       'python',
       'rust',
