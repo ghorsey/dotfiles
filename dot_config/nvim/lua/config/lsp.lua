@@ -1,6 +1,12 @@
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if client == nil then
+      Snacks.notify.warn("The client " .. ev.data.client_id .. " was not found")
+      return
+    end
+
     if client:supports_method('textDocument/completion') then
       vim.keymap.set(
         'i',

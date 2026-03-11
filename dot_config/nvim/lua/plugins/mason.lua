@@ -8,7 +8,6 @@ return {
         "bashls",
         "bicep",
         -- "roslyn", -- need to manually install this
-        -- "copilot", -- github copilot
         "cssls",
         "dockerls",
         "eslint",
@@ -25,8 +24,8 @@ return {
       },
     },
     dependencies = {
-      { 
-        "mason-org/mason.nvim", 
+      {
+        "mason-org/mason.nvim",
         opts = {
           registries = {
             "github:mason-org/mason-registry",
