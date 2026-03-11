@@ -53,5 +53,6 @@ return {
       'xml',
       'yaml',
     }
+
   end
 }
