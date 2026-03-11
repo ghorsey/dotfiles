@@ -24,7 +24,7 @@ return {
       },
     },
   },
-  config = function()
+  init = function()
     local opencode_cmd = 'opencode --port'
 
     ---@type snacks.terminal.Opts
