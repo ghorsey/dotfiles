@@ -7,7 +7,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
     
-    vim.lsp.config('*', {capabilities = MiniCompletion.get_lsp_capabilities()})
+    -- vim.lsp.config('*', {capabilities = MiniCompletion.get_lsp_capabilities()})
+    vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
     if client:supports_method('textDocument/completion') then
       vim.keymap.set(
