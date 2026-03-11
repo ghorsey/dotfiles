@@ -6,6 +6,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       Snacks.notify.warn("The client " .. ev.data.client_id .. " was not found")
       return
     end
+    
+    vim.lsp.config('*', {capabilities = MiniCompletion.get_lsp_capabilities()})
 
     if client:supports_method('textDocument/completion') then
       vim.keymap.set(
