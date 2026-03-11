@@ -31,7 +31,7 @@ function M.init()
   }
 
   if vim.fn.has("win32") == 1 then
-    dap.adapters.coreclr.options {
+    dap.adapters.coreclr.options = {
       detached = false,
     }
   end
