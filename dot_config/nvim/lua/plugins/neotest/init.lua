@@ -7,18 +7,20 @@ return {
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       -- Test adapters
-      "nsidorenco/neotest-vstest",
+      -- "nsidorenco/neotest-vstest",
+      "nvim-neotest/neotest",
       "nvim-neotest/neotest-jest",
       "marilari88/neotest-vitest",
     },
     init = function ()
-      require("plugins.neotest.adapters.neotest-vstest").init()
+      -- require("plugins.neotest.adapters.neotest-vstest").init()
 
       require("neotest").setup({
         adapters = {
           require("neotest-jest"),
-          require("neotest-vstest"),
-          require("neotest-vitest")
+          --require("neotest-vstest"),
+          require("neotest-vitest"),
+          require("neotest-dotnet"),
         }
       })
     end,
