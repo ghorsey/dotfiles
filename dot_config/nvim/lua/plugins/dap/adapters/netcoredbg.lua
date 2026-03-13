@@ -22,15 +22,18 @@ end
 
 function M.init()
   local dap = require "dap"
+  local netcoredbg_path = "/mason/packages/netcoredbg/netcoredbg"
 
+  
   -- Dot Net
   dap.adapters.coreclr = {
     type = "executable",
-    command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
+    command = vim.fn.stdpath("data") .. netcoredbg_path,
     args = { '--interpreter=vscode' },
   }
 
   if vim.fn.has("win32") == 1 then
+    dap.adapters.coreclr.command = vim.fn.stdpath("data") .. netcoredbg_path .. "/netcoredbg" -- in windows the exe is one folder deeper than linux
     dap.adapters.coreclr.options = {
       detached = false,
     }
