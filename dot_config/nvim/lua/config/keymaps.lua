@@ -15,8 +15,8 @@ vim.keymap.set("i", "<C-u>", "<ESC><CMD>u<CR>a", desc = "Undo the last action", 
 -- Quit neovim
 vim.keymap.set("n", "<C-q>", "<CMD>q<CR>", { desc = "Close the current window", silent = true})
 vim.keymap.set("i", "<C-q>", "<ESC><CMD>q<CR>", { desc = "Close the current window", silent = true })
-vim.keymap.set("n", "<C-S-q>", "<CMD>qa<CR>", { desc = "Close all windows", silent = true })
-vim.keymap.set("i", "<C-S-q>", "<ESC><CMD>qa<CR>", { desc = "Close all windows", silent = true })
+vim.keymap.set("n", "<C-M-q>", "<CMD>qa<CR>", { desc = "Close all windows", silent = true })
+vim.keymap.set("i", "<C-M-q>", "<ESC><CMD>qa<CR>", { desc = "Close all windows", silent = true })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzz", { desc = "Next search result (centered)" })
