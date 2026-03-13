@@ -8,7 +8,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       -- Test adapters
       -- "nsidorenco/neotest-vstest",
-      "nvim-neotest/neotest",
+      "Issafalcon/neotest-dotnet",
       "nvim-neotest/neotest-jest",
       "marilari88/neotest-vitest",
     },
