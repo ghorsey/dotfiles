@@ -1,5 +1,8 @@
-vim.cmd.compiler("dotnet")
--- vim.treesitter.start()
 
+-- Set compiler options first
 vim.g.dotnet_errors_only = true
 vim.g.dotnet_show_project_file = false
+
+-- Set the compiler
+vim.cmd.compiler("dotnet")
+-- vim.treesitter.start()
