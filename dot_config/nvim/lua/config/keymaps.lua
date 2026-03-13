@@ -10,7 +10,7 @@ vim.keymap.set("i", "<C-M-s>", "<ESC><CMD>wa<CR>a", { desc = "Save all open buff
 
 -- Undo
 vim.keymap.set("n", "<C-u>", "<CMD>u<CR>", { desc = "Undo the last action", silent = true })
-vim.keymap.set("i", "<C-u>", "<ESC><CMD>u<CR>a", desc = "Undo the last action", silent = true })
+vim.keymap.set("i", "<C-u>", "<ESC><CMD>u<CR>a", { desc = "Undo the last action", silent = true })
 
 -- Quit neovim
 vim.keymap.set("n", "<C-q>", "<CMD>q<CR>", { desc = "Close the current window", silent = true})
