@@ -23,6 +23,15 @@ end
 vim.fn.sign_define('DapBreakpoint', { text='🔴' })
 vim.fn.sign_define('DapBreakpointCondition', { text='🟠' })
 
+-- configure diagnostics to wrap
+vim.diagnostic.config({
+  virtual_text = {
+    wrap = true,
+    format = function(diagnostic)
+      return diagnostic.message:gsub("\n", " ") -- remove embedded newlines
+    end,
+  },
+})
 -- ================================================================================================
 -- Useful Functions
 -- ================================================================================================
