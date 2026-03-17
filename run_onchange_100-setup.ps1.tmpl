@@ -133,10 +133,6 @@ WingetInstall -Command "python3" -Package "Python.Python.3.12"
 WingetInstall -Command "clang" -Package "LLVM.LLVM"
 WingetInstall -Command "netpad" -Package "TareqImbasher.NetPad"
 
-{{- if ne .chezmoi.hostname "2MQ45115JV" }}
-WingetInstall -Command "pcloud" -Package "pCloudAG.pCloudDrive"
-{{- end }}
-
 # WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
 
 CargoInstall -Command "pay-respects"
