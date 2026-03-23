@@ -145,7 +145,7 @@ CargoInstall -Command "treesitter-cli" -Package "tree-sitter-cli"
 # CargoInstall -Command "coreutils" -Package "coreutils"
 CargoInstall -Command "cargo install-update" -Package "install-update"
 
-cargo install-update --all
+cargo install-update --all --locked
 
 if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 {
