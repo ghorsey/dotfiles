@@ -143,6 +143,9 @@ CargoInstall -Command "eza"
 CargoInstall -Command "tldr" -Package "tealdeer"
 CargoInstall -Command "treesitter-cli" -Package "tree-sitter-cli"
 # CargoInstall -Command "coreutils" -Package "coreutils"
+CargoInstall -Command "cargo install-update" -Package "install-update"
+
+cargo install-update --all
 
 if (-Not (Get-Command "nvim" -errorAction SilentlyContinue))
 {
