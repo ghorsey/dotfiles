@@ -9,19 +9,25 @@
 #  }
 #}
 
-function CargoInstall
-{
+function CargoInstall {
   param(
-    [string]$Command,
     [string]$Package
   )
-  if ([string]::IsNullOrEmpty($Package))
+  
+  # Try to get the list of installed cargo packages
+  $installed = $null
+  try
   {
-    $Package = $Command
+    $installed = cargo install-update --list 2>$null
   }
-
-  if (-Not (Get-Command $Command -errorAction SilentlyContinue))
+  catch
   {
+    # If the command errors, treat as "not installed"
+    $installed = ""
+  }
+  
+  # If the package/command is not found in the list, install it
+  if (-not ($installed -match $Package)) {
     cargo install $Package --locked
   }
 }
@@ -135,15 +141,16 @@ WingetInstall -Command "netpad" -Package "TareqImbasher.NetPad"
 
 # WriteFile -Path $profile -Value '$env:PATH += ";C:\Program Files\LLVM\bin"'
 
-CargoInstall -Command "pay-respects"
-CargoInstall -Command "rg" -Package ripgrep
-CargoInstall -Command "bob" -Package "bob-nvim"
-CargoInstall -Command "bat"
-CargoInstall -Command "eza"
-CargoInstall -Command "tldr" -Package "tealdeer"
-CargoInstall -Command "treesitter-cli" -Package "tree-sitter-cli"
-# CargoInstall -Command "coreutils" -Package "coreutils"
-CargoInstall -Command "cargo install-update" -Package "install-update"
+
+CargoInstall -Package "cargo-update"
+CargoInstall -Package "pay-respects"
+CargoInstall -Package ripgrep
+CargoInstall -Package "bob-nvim"
+CargoInstall -Package "bat"
+CargoInstall -Package "eza"
+CargoInstall -Package "tldr" -Package "tealdeer"
+CargoInstall -Package "tree-sitter-cli"
+# CargoInstall -Package "coreutils"
 
 cargo install-update --all --locked
 
