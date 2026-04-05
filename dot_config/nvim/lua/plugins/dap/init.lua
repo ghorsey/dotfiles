@@ -10,6 +10,7 @@ return {
     require("plugins.dap.dapui").init();
     require("plugins.dap.adapters.js-debug-adapter").init()
     require("plugins.dap.adapters.netcoredbg").init()
+    require("plugins.dap.adapters.codelldb").init()
   end,
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
