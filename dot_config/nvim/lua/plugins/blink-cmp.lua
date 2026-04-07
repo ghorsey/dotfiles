@@ -21,6 +21,7 @@ return {
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = { preset = 'super-tab' },
     signature = { enabled = true },
+    snippets = { preset = "luasnip" },
   },
   opts_extend = { "sources.default" }
 }
