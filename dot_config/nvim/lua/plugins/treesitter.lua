@@ -5,6 +5,9 @@ return {
   },
   lazy = false,
   build = ':TSUpdate',
+  opts = {
+    -- indent = { enable = true },
+  },
   init = function()
     local ts = require('nvim-treesitter')
 
