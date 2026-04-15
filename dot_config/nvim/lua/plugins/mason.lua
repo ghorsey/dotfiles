@@ -1,7 +1,7 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
-    lazy = true
+    lazy = true,
     opts = {
       ensure_installed = {
         "angularls",
