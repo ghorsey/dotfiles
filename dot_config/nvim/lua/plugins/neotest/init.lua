@@ -12,6 +12,7 @@ return {
       "nvim-neotest/neotest-jest",
       "marilari88/neotest-vitest",
     },
+    lazy = true,
     init = function ()
       require("plugins.neotest.adapters.neotest-vstest").init()
 
