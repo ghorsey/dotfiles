@@ -7,6 +7,9 @@ fish_add_path -a ~/.local/share/bob/nvim-bin
 
 set fish_greeting ""
 
+# enable ssh agent
+set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
+
 starship init fish | source
 
 bob complete fish | source
