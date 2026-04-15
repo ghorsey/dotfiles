@@ -1,6 +1,7 @@
 return {
   {
     "mason-org/mason-lspconfig.nvim",
+    lazy = true
     opts = {
       ensure_installed = {
         "angularls",
@@ -26,6 +27,7 @@ return {
     dependencies = {
       {
         "mason-org/mason.nvim",
+        lazy = true,
         opts = {
           registries = {
             "github:mason-org/mason-registry",
