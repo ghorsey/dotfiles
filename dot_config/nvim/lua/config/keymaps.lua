@@ -3,20 +3,20 @@ vim.g.mapleader = " "                                -- Set leader key to space
 vim.g.maplocalleader = " "                           -- Set local leader key (NEW)
 
 -- Save buffers
-vim.keymap.set("n", "<C-s>", "<CMD>w<CR>", { desc = "Save the current buffer", silent = true, })
-vim.keymap.set("i", "<C-s>", "<ESC><CMD>w<CR>a", { desc = "Save the current buffer", silent = true, })
-vim.keymap.set( "n","<C-M-s>", "<CMD>wa<CR>", { desc = "Save all open buffers", silent = true, })
-vim.keymap.set("i", "<C-M-s>", "<ESC><CMD>wa<CR>a", { desc = "Save all open buffers", silent = true, })
+-- vim.keymap.set("n", "<C-s>", "<CMD>w<CR>", { desc = "Save the current buffer", silent = true, })
+-- vim.keymap.set("i", "<C-s>", "<ESC><CMD>w<CR>a", { desc = "Save the current buffer", silent = true, })
+-- vim.keymap.set("n","<C-M-s>", "<CMD>wa<CR>", { desc = "Save all open buffers", silent = true, })
+-- vim.keymap.set("i", "<C-M-s>", "<ESC><CMD>wa<CR>a", { desc = "Save all open buffers", silent = true, })
 
 -- Undo
 vim.keymap.set("n", "<C-u>", "<CMD>u<CR>", { desc = "Undo the last action", silent = true })
 vim.keymap.set("i", "<C-u>", "<ESC><CMD>u<CR>a", { desc = "Undo the last action", silent = true })
 
 -- Quit neovim
-vim.keymap.set("n", "<C-q>", "<CMD>q<CR>", { desc = "Close the current window", silent = true})
-vim.keymap.set("i", "<C-q>", "<ESC><CMD>q<CR>", { desc = "Close the current window", silent = true })
-vim.keymap.set("n", "<C-M-q>", "<CMD>qa<CR>", { desc = "Close all windows", silent = true })
-vim.keymap.set("i", "<C-M-q>", "<ESC><CMD>qa<CR>", { desc = "Close all windows", silent = true })
+-- vim.keymap.set("n", "<C-q>", "<CMD>q<CR>", { desc = "Close the current window", silent = true})
+-- vim.keymap.set("i", "<C-q>", "<ESC><CMD>q<CR>", { desc = "Close the current window", silent = true })
+-- vim.keymap.set("n", "<C-M-q>", "<CMD>qa<CR>", { desc = "Close all windows", silent = true })
+-- vim.keymap.set("i", "<C-M-q>", "<ESC><CMD>qa<CR>", { desc = "Close all windows", silent = true })
 
 -- Center screen when jumping
 vim.keymap.set("n", "n", "nzz", { desc = "Next search result (centered)" })

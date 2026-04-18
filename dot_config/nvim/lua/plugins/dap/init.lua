@@ -6,7 +6,6 @@ return {
     "mason-org/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
   },
-  lazy = true,
   init = function()
     require("plugins.dap.dapui").init();
     require("plugins.dap.adapters.js-debug-adapter").init()
