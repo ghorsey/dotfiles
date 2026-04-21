@@ -13,7 +13,7 @@ return {
       "marilari88/neotest-vitest",
     },
     lazy = true,
-    init = function ()
+    config = function ()
       require("plugins.neotest.adapters.neotest-vstest").init()
 
       require("neotest").setup({
