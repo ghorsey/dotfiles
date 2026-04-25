@@ -39,7 +39,7 @@ function M.init()
       request = "launch",
       program = get_target,
       cwd = '${workspaceFolder}',
-      stopOnEntry = false,
+      --stopOnEntry = true,
     },
   }
 end
