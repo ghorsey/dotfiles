@@ -6,7 +6,7 @@ return {
     'nvim-telescope/telescope-fzy-native.nvim',
     'nvim-tree/nvim-web-devicons'
   },
-  init = function()
+  config = function()
     -- local telescope = require('telescope')
     --
     -- telescope.setup {

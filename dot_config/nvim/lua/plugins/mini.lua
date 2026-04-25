@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.nvim',
   version = false,
-  init = function()
+  config = function()
     local spec_treesitter = require("mini.ai").gen_spec.treesitter
 
     require('mini.ai').setup({

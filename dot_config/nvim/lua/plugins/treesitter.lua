@@ -8,7 +8,7 @@ return {
   opts = {
     -- indent = { enable = true },
   },
-  init = function()
+  config = function()
     local ts = require('nvim-treesitter')
 
     ts.install {
