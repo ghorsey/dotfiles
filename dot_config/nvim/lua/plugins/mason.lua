@@ -14,7 +14,7 @@ return {
         "fish_lsp",
         "gh_actions_ls",
         "html",
-        "json-lsp",
+        "jsonls",
         "lua_ls",
         "markdown_oxide",
         "rust_analyzer",
