@@ -9,7 +9,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     
     -- vim.lsp.config('*', {capabilities = MiniCompletion.get_lsp_capabilities()})
     vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
-
+    
+    vim.lsp.inlay_hint.enable(true)      
+    
+    -- Do I need this?
     if client:supports_method('textDocument/completion') then
       vim.keymap.set(
         'i',
