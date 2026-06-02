@@ -1,6 +1,7 @@
 return {
   'windwp/nvim-autopairs',
   event = "InsertEnter",
+  enabled = false,
   -- use opts = {} for passing setup options
   -- this is equivalent to setup({}) function
   opts = {
@@ -8,9 +9,9 @@ return {
     -- enable_check_bracket_line = true
   },
   config = function()
-    local npairs = require("nvim-autopairs")
-    local Rule = require("nvim-autopairs.rule")
-    local cond = require("nvim-autopairs.conds")
+    -- local npairs = require("nvim-autopairs")
+    -- local Rule = require("nvim-autopairs.rule")
+    -- local cond = require("nvim-autopairs.conds")
 
     -- npairs.add_rules({
     --   Rule("{", "}", "rust")
