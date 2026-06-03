@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "lsp": true,
+  "server": {
+    "port": 4096
+  },
+  "provider": {
+    "lmstudio":{
+      "name": "LAN-LLM",
+      "npm": "@ai-sdk/openai-compatible",
+      "options":{
+        "baseURL": "http://192.168.1.47:4141/v1"
+      },
+      "models": {
+        "qwen3.6-27b-mtp": {
+          "name": "Qwen3.6 27b-mtp",
+          "reasoning": true
+        }
+      }
+    }
+  }
+}
