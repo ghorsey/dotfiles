@@ -7,6 +7,8 @@ return {
   build = ':TSUpdate',
   opts = {
     -- indent = { enable = true },
+    highlight = { enable = true },
+    indent = { enable = true },
   },
   config = function()
     local ts = require('nvim-treesitter')
