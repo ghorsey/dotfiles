@@ -16,6 +16,6 @@ return {
     "vue"
   },
   init_options = {
-    plugins = { vue_plugin }
+    plugins = { vue_plugin },
   }
 }
