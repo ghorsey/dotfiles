@@ -22,14 +22,19 @@ return {
     keymap = { preset = 'super-tab' },
     signature = { enabled = true },
     snippets = { preset = "luasnip" },
-  },
-  sources = {
-    default = {
-      "lsp",
-      "path",
-      "snippets",
-      --"buffer",
+    sources = {
+      default = {
+        "lsp",
+        "path",
+        "snippets",
+        --"buffer",
+      }
+    },
+    --opts_extend = { "sources.default" }
+    completion = {
+      menu = { border = 'single'},
+      documentation = { window = { border = "single" }, },
+      signature = { window = { border = "single" }, },
     }
   },
-  opts_extend = { "sources.default" }
 }
