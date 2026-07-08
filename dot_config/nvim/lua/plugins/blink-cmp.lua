@@ -20,8 +20,6 @@ return {
     --
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = { preset = 'super-tab' },
-    signature = { enabled = true },
-    snippets = { preset = "luasnip" },
     sources = {
       default = {
         "lsp",
@@ -30,11 +28,21 @@ return {
         --"buffer",
       }
     },
-    --opts_extend = { "sources.default" }
     completion = {
-      menu = { border = 'single'},
-      documentation = { window = { border = "single" }, },
-      signature = { window = { border = "single" }, },
-    }
+      menu = {
+        border = 'single'
+      },
+      documentation = {
+        window = {
+          border = "single"
+        },
+      },
+    },
+    signature = {
+      enabled = true,
+      window = {
+        border = "single"
+      },
+    },
   },
 }
