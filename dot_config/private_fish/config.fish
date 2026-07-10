@@ -18,3 +18,8 @@ pay-respects fish --alias | source
 
 zoxide init fish | source
 
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/jefedeltodos/.lmstudio/bin
+# End of LM Studio CLI section
+
