@@ -6,16 +6,23 @@
     "port": 4096
   },
   "provider": {
-    "lmstudio":{
+    "lmstudio": {
       "name": "LAN-LLM",
       "npm": "@ai-sdk/openai-compatible",
-      "options":{
+      "options": {
         "baseURL": "http://192.168.1.47:4141/v1"
       },
       "models": {
-        "qwen3.6-27b-mtp": {
-          "name": "Qwen3.6 27b-mtp",
-          "reasoning": true
+        "qwen3.5-9b": {
+          "name": "Qwen3.5 9b",
+          "reasoning": true,
+          "options": {
+            "maxTokens": 262144,
+            "maxInputTokens": 262144,
+            "modalities": {
+              "input": ["text", "image"]
+            }
+          }
         }
       }
     }
