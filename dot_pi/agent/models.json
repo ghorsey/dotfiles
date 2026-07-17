@@ -1,0 +1,20 @@
+{
+  "providers": {
+    "LMStudio": {
+      "baseUrl": "http://192.168.1.47:4141/v1",
+      "apiKey": "notneeded",
+      "auth": "none",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "qwen/qwen3.5-9b",
+          "name": "Qwen3.5 9b",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 262144,
+          "maxTokens":  262144
+        }
+      ]
+    }
+  }
+}
